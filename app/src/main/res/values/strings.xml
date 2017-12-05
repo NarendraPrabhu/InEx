@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">InEx</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_description_spent">Spent For</string>
+    <string name="label_description_earned">Earned From</string>
+    <array name="inex_options">
+        <item>@string/label_description_spent</item>
+        <item>@string/label_description_earned</item>
+    </array>
+    <string name="label_amount">Amount</string>
+    <string name="label_date">On Date</string>
+    <string name="save">Save</string>
+    <string name="warning_field_cannot_be_empty"> \'%s\' cannot be empty</string>
+</resources>

@@ -1,0 +1,388 @@
+--------- beginning of main
+12-04 06:18:36.304 31860 31918 W System.err: java.lang.NullPointerException: Attempt to invoke virtual method 'void com.lenovo.anyshare.egc.b()' on a null object reference
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.umeng.analytics.d.h(SourceFile:201)
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.umeng.analytics.d.e(SourceFile:284)
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.umeng.analytics.MobclickAgent.onKillProcess(SourceFile:505)
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.lenovo.anyshare.yb.a(SourceFile:60)
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.lenovo.anyshare.dgv.execute(SourceFile:152)
+12-04 06:18:36.305 31860 31918 W System.err: 	at com.lenovo.anyshare.dbg.run(SourceFile:435)
+12-04 06:18:36.305 31860 31918 W System.err: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:428)
+12-04 06:18:36.306 31860 31918 W System.err: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+12-04 06:18:36.306 31860 31918 W System.err: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:272)
+12-04 06:18:36.306 31860 31918 W System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+12-04 06:18:36.306 31860 31918 W System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+12-04 06:18:36.306 31860 31918 W System.err: 	at java.lang.Thread.run(Thread.java:761)
+12-04 06:18:36.310 31860 31918 I art     : System.exit called, status: 0
+12-04 06:18:36.310 31860 31918 I AndroidRuntime: VM exiting with result code 0, cleanup skipped.
+--------- beginning of system
+12-04 06:18:36.329  3523  4933 I ActivityManager: Process com.lenovo.anyshare.gps (pid 31860) has died
+12-04 06:18:36.329  3523  4933 D ActivityManager: cleanUpApplicationRecord -- 31860
+12-04 06:18:36.458  3033  3033 I cnss-daemon: RTM_NEWROUTE Indication
+12-04 06:18:37.880  3523  3523 I DeviceIdleController: updateChargingLocked: charging=true
+12-04 06:18:37.881  3523  3523 I DeviceIdleController: becomeActiveLocked, reason = charging
+12-04 06:18:37.886  4905  5051 W QCNEJ   : |CORE| CNE received unexpected action: android.intent.action.BATTERY_CHANGED
+12-04 06:18:37.894  4198  4198 I BatteryController:  fireBatteryLevelChanged mLevel:100 PluggedIn:true Charging:true Fastcharge:false show:false style:0
+12-04 06:18:37.896  4398  4398 E QtiImsExtUtils: getConfigForPhoneId subId is invalid
+12-04 06:18:37.896  4398  4398 E QtiImsExtUtils: isCarrierConfigEnabled bundle is null
+12-04 06:18:38.719 31951 31951 V BoostFramework: mAcquireFunc method = public int com.qualcomm.qti.Performance.perfLockAcquire(int,int[])
+12-04 06:18:38.720 31951 31951 V BoostFramework: mReleaseFunc method = public int com.qualcomm.qti.Performance.perfLockRelease()
+12-04 06:18:38.720 31951 31951 V BoostFramework: mAcquireTouchFunc method = public int com.qualcomm.qti.Performance.perfLockAcquireTouch(android.view.MotionEvent,android.util.DisplayMetrics,int,int[])
+12-04 06:18:38.720 31951 31951 V BoostFramework: mIOPStart method = public int com.qualcomm.qti.Performance.perfIOPrefetchStart(int,java.lang.String)
+12-04 06:18:38.720 31951 31951 V BoostFramework: mIOPStop method = public int com.qualcomm.qti.Performance.perfIOPrefetchStop()
+12-04 06:18:38.724 31951 31951 V BoostFramework: BoostFramework() : mPerf = com.qualcomm.qti.Performance@33f8ba0
+12-04 06:18:38.820  3022  3515 D APM_AudioPolicyManager: getOutput() device 2, stream 1, samplingRate 0, format 0, channelMask 3, flags 0
+12-04 06:18:38.821  3022  3515 D AudioPolicyManagerCustom: getOutput() The last flag  0, forcedeepbufferoutput 0
+12-04 06:18:38.821  3022  3515 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+12-04 06:18:38.821  3022  3515 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13
+12-04 06:18:38.822  3022 20206 D APM_AudioPolicyManager: getOutput() device 2, stream 1, samplingRate 0, format 0, channelMask 3, flags 0
+12-04 06:18:38.822  3523  4445 I ActivityManager: START u0 {cmp=android.income.expense/.ui.AddInExActivity} from uid 10611 pid 31951 on display 0
+12-04 06:18:38.822  3022 20206 D AudioPolicyManagerCustom: getOutput() The last flag  0, forcedeepbufferoutput 0
+12-04 06:18:38.822  3022 20206 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+12-04 06:18:38.822  3022 20206 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13
+12-04 06:18:38.825  3022  3285 D APM_AudioPolicyManager: startOutput() output 13, stream 1, session 57
+12-04 06:18:38.825  3022  3285 D AudioPolicyManagerCustom: getNewOutputDevice() selected device 2
+12-04 06:18:38.825  3022  3285 D APM_AudioPolicyManager: setOutputDevice() device 0002 delayMs 0
+12-04 06:18:38.828  3022  3470 D audio_hw_primary: out_set_parameters: enter: usecase(1: low-latency-playback) kvpairs: routing=2
+12-04 06:18:38.828  3022  3470 D audio_hw_extn: audio_extn_set_anc_parameters: anc_enabled:0
+12-04 06:18:38.828  3022  3470 D audio_hw_spkr_prot: audio_extn_fbsp_set_parameters: Speaker protection disabled
+12-04 06:18:38.829  3022  3285 D APM_AudioPolicyManager: startOutput()--
+12-04 06:18:38.831  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{e432f39 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.833  3022  3470 D audio_hw_primary: start_output_stream: enter: stream(0xf4ef4000)usecase(1: low-latency-playback) devices(0x2)
+12-04 06:18:38.834  3523  4445 D ActivityTrigger: ActivityTrigger activityPauseTrigger 
+12-04 06:18:38.834  3022  3470 D audio_hw_primary: select_devices for use case (low-latency-playback)
+12-04 06:18:38.835  3022  3470 D audio_hw_primary: select_devices: out_snd_device(2: speaker) in_snd_device(0: )
+12-04 06:18:38.835  3009  3010 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [4, 0]
+12-04 06:18:38.835  3022  3470 I msm8974_platform: platform_check_and_set_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+12-04 06:18:38.835  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+12-04 06:18:38.835  3022  3470 I msm8974_platform: platform_check_and_set_codec_backend_cfg: new_snd_devices[0] is 2
+12-04 06:18:38.835  3022  3470 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+12-04 06:18:38.835  3022  3470 D msm8974_platform: platform_check_codec_backend_cfg:becf: afe: playback on non-44.1-support device Configure afe to default Sample Rate(48k)
+12-04 06:18:38.835  3022  3470 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: Codec selected backend: 0 updated bit width: 16 and sample rate: 48000
+12-04 06:18:38.835  3022  3470 D audio_hw_primary: check_usecases_codec_backend:becf: force routing 0
+12-04 06:18:38.835  3022  3470 D audio_hw_primary: check_usecases_codec_backend:becf: check_usecases num.of Usecases to switch 0
+12-04 06:18:38.835  3022  3470 D hardware_info: hw_info_append_hw_type : device_name = speaker
+12-04 06:18:38.836  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(0) new_snd_devices(1680801793)
+12-04 06:18:38.836  3022  3470 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+12-04 06:18:38.836  3022  3470 I soundtrigger: audio_extn_sound_trigger_update_device_status: device 0x2 of type 0 for Event 1, with Raise=0
+12-04 06:18:38.836  3022  3470 D aud_dev_arbi: acquireOneDevice: device owner for device 2 is 1
+12-04 06:18:38.837  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{e432f39 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.844  3022  3470 I audio_hw_primary: select_devices Selected apptype: 69937
+12-04 06:18:38.844  3022  3470 D soundtrigger: audio_extn_sound_trigger_update_stream_status: uc_id 1 of type 0 for Event 3, with Raise=0
+12-04 06:18:38.844  3022  3470 I audio_hw_utils: audio_extn_utils_send_app_type_cfg PLAYBACK app_type 69937, acdb_dev_id 15, sample_rate 48000
+12-04 06:18:38.844  3022  3470 I audio_hw_utils: audio_extn_utils_send_app_type_cfg:becf: adm: app_type 69936, acdb_dev_id 15, sample_rate 48000
+12-04 06:18:38.844  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(1) new_snd_devices(-195034128)
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 15, path = 0, app id = 0x11131, sample rate = 48000
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> send_asm_topology
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TOPOLOGY_ID
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> send_adm_topology
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TOPOLOGY_ID
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> send_audtable
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE_SIZE
+12-04 06:18:38.844  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_AUDPROC_CAL
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> send_audvoltable
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 5
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 12
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> send_audstrmtable
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TABLE_V2
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> audstrm_cal->cal_type.cal_data.cal_size = 16
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> send_afe_topology
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_TOPOLOGY_ID
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 15, Topology Id 1025e
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> send_afe_cal
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_AFE_CAL
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> send_hw_delay : acdb_id = 15 path = 0
+12-04 06:18:38.845  3022  3470 D ACDB-LOADER: ACDB -> ACDB_AVSYNC_INFO: ACDB_CMD_GET_DEVICE_PROPERTY
+12-04 06:18:38.845  3022  3470 D audio_hw_primary: enable_audio_route: apply mixer and update path: low-latency-playback quat_i2s
+12-04 06:18:38.847 31951 31987 D AppTracker: App Event: stop
+12-04 06:18:38.847  3022  3470 D audio_hw_primary: select_devices: done
+12-04 06:18:38.850  3022  3470 D msm8974_platform: platform_set_channel_map mixer_ctl_name:Playback Channel Map15
+12-04 06:18:38.850  3022  3470 D msm8974_platform: platform_set_channel_map: set mapping(1 2 0 0 0 0 0 0) for channel:2
+12-04 06:18:38.861 31951 31951 V BoostFramework: BoostFramework() : mPerf = com.qualcomm.qti.Performance@3e74ff7
+12-04 06:18:38.861 31951 31951 V BoostFramework: BoostFramework() : mPerf = com.qualcomm.qti.Performance@3e47e64
+12-04 06:18:38.875 31951 31988 D AppTracker: App Event: start
+12-04 06:18:38.889  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.889  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.895  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.910  3022  3470 D audio_hw_primary: start_output_stream: exit
+12-04 06:18:38.914  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.919  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.921 15688 15688 I GoogleInputMethod: onFinishInput() : Dummy InputConnection bound
+12-04 06:18:38.922  3523  3594 I ActivityManager: Displayed android.income.expense/.ui.AddInExActivity: +76ms
+12-04 06:18:38.923 15688 15688 I FederatedC2QExtension: registering manifest url 'https://www.gstatic.com/android/keyboard/modelpack/federatedc2q/superpacks_manifest_20170921.json'
+12-04 06:18:38.923 15688 15688 I Superpacks: Superpacks#registerManifest, name: federatedc2q.20170921, config: RegistrationConfig{url=https://www.gstatic.com/android/keyboard/modelpack/federatedc2q/superpacks_manifest_20170921.json, packingScheme=null, constraints=0}
+12-04 06:18:38.924 15688 15688 I FederatedC2QExtension: model for en_GB/20170921 is not yet available
+12-04 06:18:38.925 15688 15688 I FederatedC2QExtension: requesting model 'federated_conv2query_triggering_en_GB_20170921'
+12-04 06:18:38.925 15688 15688 I FederatedC2QExtension: no valid model for inferencing found, switching to baseline.
+12-04 06:18:38.925 15688 15734 I Superpacks: Manifest 'federatedc2q' is already the current sync version.
+12-04 06:18:38.926 15688 15725 I Superpacks: Superpacks#registerSlicingStrategy, name: federatedc2q, strategy: GetPackByNameSlicingStrategy
+12-04 06:18:38.926 15688 15725 I Superpacks: Superpacks#sync, name: federatedc2q
+12-04 06:18:38.927 15688 15688 I LatinIme: initialize() : Language = en-GB
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: failed obtaining model for en_GB/20170921
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: java.lang.NullPointerException: Pack federatedc2q:federated_conv2query_triggering_en_GB_20170921 is not part of manifest federatedc2q.20170921
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at duq.a(PG:5)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at dtu.a(PG:7)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at dus.a(PG:104)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at duy.a(Unknown Source)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at fit.a(PG:7)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at fis.run(PG:33)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at fjy.run(PG:3)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:428)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:272)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+12-04 06:18:38.929 15688 15725 W FederatedC2QExtension: 	at java.lang.Thread.run(Thread.java:761)
+12-04 06:18:38.929 15688 15688 I Delight5Facilitator: initializeForIme() : Locale = [en_GB]
+12-04 06:18:38.929 15688 15688 I Delight5Facilitator: initializeForIme() : Locale == CurrentLocale
+12-04 06:18:38.930  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.934 15688 15688 I FirebaseJobDispatcher: Schedule task: PeriodicTasks. Success.
+12-04 06:18:38.935 15688 15688 I LatinIme: onActivate() : EditorInfo = Package = android.income.expense : Type = Text : Learning = Enable : Suggestion = Show : AutoCorrection = Enable : Microphone = Show : Incognito = Disable
+12-04 06:18:38.944 31951 31971 D OpenGLRenderer: endAllActiveAnimators on 0x7f791d5400 (RippleDrawable) with handle 0x7f78ec15c0
+12-04 06:18:38.945  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.949 15688 15688 I InputContext: input context reset success: true error: 0 input_state_id 29
+12-04 06:18:38.951 15688 16014 I Delight5Decoder: fetchPredictionsFromEngine() : bue returned good response in 0 ms
+12-04 06:18:38.952 15688 15688 W VoiceImeTranscriptor: UIME feature enabled: true
+12-04 06:18:38.952 15688 16014 I native  : input-context-store.cc:116 Using roll back input context operation: [OverrideDecodedCandidates] reason: client [29] vs decoder [30]
+12-04 06:18:38.954 15688 15688 I LatinMotionHandler: consumeEvent() : GestureTypingEnabled = true
+12-04 06:18:38.955 15688 15688 I EmojiDataExtension: onActivate() : Locale = en_GB
+12-04 06:18:38.955 15688 16014 I Delight5Decoder: addPredictionEngine() : Duplicate engine bue@fac98af
+12-04 06:18:38.955 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.emojidata.EmojiDataExtension.
+12-04 06:18:38.956 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.doodle.DoodleExtension.
+12-04 06:18:38.956 15688 15688 I Conv2QueryExtension: isEnabled() : true
+12-04 06:18:38.956 15688 15688 I Conv2QueryExtension: Current locale: en_GB, config allows these locales: de,en,fr,it,es,pt
+12-04 06:18:38.956 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.sticker.DefaultStickerExtension.
+12-04 06:18:38.956 15688 15688 W Conv2QueryExtension: Conv2Query not enabled due to current app [android.income.expense] not in whitelist
+12-04 06:18:38.956 15688 15688 W Conv2QueryExtension: onActivate() : Disabled by unsupported host app
+12-04 06:18:38.957 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.sense.ConversationToQueryExtension.
+12-04 06:18:38.958 15688 15688 W VoiceImeTranscriptor: UIME feature enabled: true
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: android.income.expense, 13496
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: com.veradocs.android, -1
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: net.oneplus.forums, -1
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: com.oneplus.filemanager, -1
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: com.android.chrome, 13480
+12-04 06:18:38.960  4198  4198 D SystemServicesProxy: getRecentTasks: com.android.mms, -1
+12-04 06:18:38.965  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.972  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:38.975 15688 15688 I DoodleExtension: Displayed doodle in c2q pill: bua{id=32615474, text=kids coding languages, largeImageUri=https://www.google.co.in/logos/doodles/2017/celebrating-50-years-of-kids-coding-5745168905928704.3-l.png, smallImageUri=https://www.google.co.in/logos/doodles/2017/celebrating-50-years-of-kids-coding-5745168905928704.4-s.png}
+12-04 06:18:38.983  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.002  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.003  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.006  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.013  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.016  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.017  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.030  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.048  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.064  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.153  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.156  3022  3285 D APM_AudioPolicyManager: stopOutput() output 13, stream 1, session 57
+12-04 06:18:39.156  3022  3285 D AudioPolicyManagerCustom: getNewOutputDevice() selected device 0
+12-04 06:18:39.157  3022  3285 D APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 96
+12-04 06:18:39.236  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.287  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.293  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.299  3523  3563 D ActivityTrigger: ActivityTrigger activityStopTrigger 
+12-04 06:18:39.316  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.323  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:39.533  3033  3033 I cnss-daemon: RTM_NEWROUTE Indication
+12-04 06:18:40.034  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.120  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.153  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.184  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.279  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.318  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.355  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.388  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.497  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.527  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.553  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.607  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.760 15688 15688 I PhenotypeIme: refreshConfiguration() : Force = false : UpdateAvailable = false : Age = 1 minutes : MaxAge = 720 minutes
+12-04 06:18:40.763 15688 15688 I LatinIme: abortComposing()
+12-04 06:18:40.766 15688 15688 I Delight5Decoder: abortComposing() : input state id = 43
+12-04 06:18:40.767 15688 15688 I LatinIme: onDeactivate()
+12-04 06:18:40.770 31951 31951 W IInputConnectionWrapper: finishComposingText on inactive InputConnection
+12-04 06:18:40.772 15688 15688 I EmojiDataExtension: onDeactivate() : Locale = en_GB
+12-04 06:18:40.776 15688 15688 I FederatedC2QExtension: registering manifest url 'https://www.gstatic.com/android/keyboard/modelpack/federatedc2q/superpacks_manifest_20170921.json'
+12-04 06:18:40.777 15688 15688 I Superpacks: Superpacks#registerManifest, name: federatedc2q.20170921, config: RegistrationConfig{url=https://www.gstatic.com/android/keyboard/modelpack/federatedc2q/superpacks_manifest_20170921.json, packingScheme=null, constraints=0}
+12-04 06:18:40.778 15688 15688 I FederatedC2QExtension: model for en_GB/20170921 is not yet available
+12-04 06:18:40.779 15688 15688 I FederatedC2QExtension: requesting model 'federated_conv2query_triggering_en_GB_20170921'
+12-04 06:18:40.779 15688 15688 I FederatedC2QExtension: no valid model for inferencing found, switching to baseline.
+12-04 06:18:40.780 15688 15734 I Superpacks: Manifest 'federatedc2q' is already the current sync version.
+12-04 06:18:40.783 15688 15725 I Superpacks: Superpacks#registerSlicingStrategy, name: federatedc2q, strategy: GetPackByNameSlicingStrategy
+12-04 06:18:40.783 15688 15725 I Superpacks: Superpacks#sync, name: federatedc2q
+12-04 06:18:40.787 15688 15688 I EmojiDataExtension: onActivate() : Locale = en_GB
+12-04 06:18:40.788 15688 16014 I Delight5Decoder: addPredictionEngine() : Duplicate engine bue@fac98af
+12-04 06:18:40.788 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.emojidata.EmojiDataExtension.
+12-04 06:18:40.789 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.doodle.DoodleExtension.
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: failed obtaining model for en_GB/20170921
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: java.lang.NullPointerException: Pack federatedc2q:federated_conv2query_triggering_en_GB_20170921 is not part of manifest federatedc2q.20170921
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at duq.a(PG:5)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at dtu.a(PG:7)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at dus.a(PG:104)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at duy.a(Unknown Source)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at fit.a(PG:7)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at fis.run(PG:33)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at fjy.run(PG:3)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:428)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:272)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+12-04 06:18:40.790 15688 15725 W FederatedC2QExtension: 	at java.lang.Thread.run(Thread.java:761)
+12-04 06:18:40.790 15688 15688 I Conv2QueryExtension: isEnabled() : true
+12-04 06:18:40.791 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.sticker.DefaultStickerExtension.
+12-04 06:18:40.791 15688 15688 I Conv2QueryExtension: Current locale: en_GB, config allows these locales: de,en,fr,it,es,pt
+12-04 06:18:40.791 15688 15688 W Conv2QueryExtension: Conv2Query not enabled due to current app [android.income.expense] not in whitelist
+12-04 06:18:40.792 15688 15688 W Conv2QueryExtension: onActivate() : Disabled by unsupported host app
+12-04 06:18:40.793 15688 15709 I PrimesMetrics: Ignore memory metric of com.google.android.apps.inputmethod.libs.search.sense.ConversationToQueryExtension.
+12-04 06:18:40.798  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.803  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.821  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:40.823  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.074  3022  3470 D audio_hw_primary: out_standby: enter: stream (0xf4ef4000) usecase(1: low-latency-playback)
+12-04 06:18:42.121  3022  3470 D audio_hw_primary: disable_audio_route: reset and update mixer path: low-latency-playback quat_i2s
+12-04 06:18:42.124  3022  3470 D soundtrigger: audio_extn_sound_trigger_update_stream_status: uc_id 1 of type 0 for Event 2, with Raise=0
+12-04 06:18:42.125  3022  3470 D hardware_info: hw_info_append_hw_type : device_name = speaker
+12-04 06:18:42.125  3022  3470 D audio_hw_primary: disable_snd_device: snd_device(2: speaker)
+12-04 06:18:42.125  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(0) new_snd_devices(0)
+12-04 06:18:42.138  3022  3470 D aud_dev_arbi: releaseOneDevice: not sending command, device argument (2) does not match any registered device
+12-04 06:18:42.139  3022  3470 D aud_dev_arbi: releaseOneDevice: device 2 owner is 0
+12-04 06:18:42.139  3022  3470 I soundtrigger: audio_extn_sound_trigger_update_device_status: device 0x2 of type 0 for Event 0, with Raise=0
+12-04 06:18:42.139  3022  3470 D audio_hw_primary: out_standby: exit
+12-04 06:18:42.369 31951 31951 D AndroidRuntime: Shutting down VM
+12-04 06:18:42.369  3022  4064 D APM_AudioPolicyManager: getOutput() device 2, stream 1, samplingRate 0, format 0, channelMask 3, flags 0
+12-04 06:18:42.369  3022  4064 D AudioPolicyManagerCustom: getOutput() The last flag  0, forcedeepbufferoutput 0
+12-04 06:18:42.369  3022  4064 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+12-04 06:18:42.369  3022  4064 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13
+12-04 06:18:42.371  3022  4063 D APM_AudioPolicyManager: getOutput() device 2, stream 1, samplingRate 0, format 0, channelMask 3, flags 0
+12-04 06:18:42.371  3022  4063 D AudioPolicyManagerCustom: getOutput() The last flag  0, forcedeepbufferoutput 0
+12-04 06:18:42.371  3022  4063 I AudioPolicyManagerCustom: FLAG None hence request for a primary output
+12-04 06:18:42.371  3022  4063 D AudioPolicyManagerCustom: getOutputForDevice() returns output 13
+--------- beginning of crash
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: FATAL EXCEPTION: main
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: Process: android.income.expense, PID: 31951
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: java.lang.ClassCastException: java.util.Date cannot be cast to java.lang.Long
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.income.expense.ui.AddInExActivity.onClick(AddInExActivity.java:94)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.view.View.performClick(View.java:5669)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:22549)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6321)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+12-04 06:18:42.371 31951 31951 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+12-04 06:18:42.372 31951 31951 D AppTracker: App Event: crash
+12-04 06:18:42.375  3022  3285 D APM_AudioPolicyManager: startOutput() output 13, stream 1, session 57
+12-04 06:18:42.376  3022  3285 D AudioPolicyManagerCustom: getNewOutputDevice() selected device 2
+12-04 06:18:42.376  3022  3285 D APM_AudioPolicyManager: setOutputDevice() device 0002 delayMs 0
+12-04 06:18:42.379  3022  3470 D audio_hw_primary: out_set_parameters: enter: usecase(1: low-latency-playback) kvpairs: routing=2
+12-04 06:18:42.379  3022  3470 D audio_hw_extn: audio_extn_set_anc_parameters: anc_enabled:0
+12-04 06:18:42.379  3022  3470 D audio_hw_spkr_prot: audio_extn_fbsp_set_parameters: Speaker protection disabled
+12-04 06:18:42.381  3022  3285 D APM_AudioPolicyManager: startOutput()--
+12-04 06:18:42.382  3022  3470 D audio_hw_primary: start_output_stream: enter: stream(0xf4ef4000)usecase(1: low-latency-playback) devices(0x2)
+12-04 06:18:42.382  3009  3010 E ANDR-PERF-RESOURCEQS: Failed to apply optimization [4, 0]
+12-04 06:18:42.382  3022  3470 D audio_hw_primary: select_devices for use case (low-latency-playback)
+12-04 06:18:42.382  3022  3470 D audio_hw_primary: select_devices: out_snd_device(2: speaker) in_snd_device(0: )
+12-04 06:18:42.383  3022  3470 I msm8974_platform: platform_check_and_set_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+12-04 06:18:42.383  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(1) new_snd_devices(0)
+12-04 06:18:42.383  3022  3470 I msm8974_platform: platform_check_and_set_codec_backend_cfg: new_snd_devices[0] is 2
+12-04 06:18:42.383  3022  3470 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: bitwidth 16, samplerate 48000 channels 2, backend_idx 0 usecase = 1 device (speaker)
+12-04 06:18:42.383  3022  3470 D msm8974_platform: platform_check_codec_backend_cfg:becf: afe: playback on non-44.1-support device Configure afe to default Sample Rate(48k)
+12-04 06:18:42.383  3022  3470 I msm8974_platform: platform_check_codec_backend_cfg:becf: afe: Codec selected backend: 0 updated bit width: 16 and sample rate: 48000
+12-04 06:18:42.383  3022  3470 D audio_hw_primary: check_usecases_codec_backend:becf: force routing 0
+12-04 06:18:42.383  3022  3470 D audio_hw_primary: check_usecases_codec_backend:becf: check_usecases num.of Usecases to switch 0
+12-04 06:18:42.383  3022  3470 D hardware_info: hw_info_append_hw_type : device_name = speaker
+12-04 06:18:42.383  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(0) new_snd_devices(1680801793)
+12-04 06:18:42.384  3022  3470 D audio_hw_primary: enable_snd_device: snd_device(2: speaker)
+12-04 06:18:42.384  3022  3470 I soundtrigger: audio_extn_sound_trigger_update_device_status: device 0x2 of type 0 for Event 1, with Raise=0
+12-04 06:18:42.384  3022  3470 D aud_dev_arbi: acquireOneDevice: device owner for device 2 is 1
+12-04 06:18:42.390  3523 11266 W ActivityManager:   Force finishing activity android.income.expense/.ui.AddInExActivity
+12-04 06:18:42.394  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.398  3022  3470 I audio_hw_primary: select_devices Selected apptype: 69937
+12-04 06:18:42.399  3022  3470 D soundtrigger: audio_extn_sound_trigger_update_stream_status: uc_id 1 of type 0 for Event 3, with Raise=0
+12-04 06:18:42.399  3022  3470 I audio_hw_utils: audio_extn_utils_send_app_type_cfg PLAYBACK app_type 69937, acdb_dev_id 15, sample_rate 48000
+12-04 06:18:42.399  3022  3470 I audio_hw_utils: audio_extn_utils_send_app_type_cfg:becf: adm: app_type 69936, acdb_dev_id 15, sample_rate 48000
+12-04 06:18:42.399  3022  3470 D msm8974_platform: platform_can_split_snd_device: snd_device(2) num devices(1) new_snd_devices(-195034128)
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> send_audio_cal, acdb_id = 15, path = 0, app id = 0x11131, sample rate = 48000
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> send_asm_topology
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TOPOLOGY_ID
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> send_adm_topology
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TOPOLOGY_ID
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> send_audtable
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE_SIZE
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_COMMON_TABLE
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_AUDPROC_CAL
+12-04 06:18:42.399  3022  3470 D ACDB-LOADER: ACDB -> send_audvoltable
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_GAIN_DEP_STEP_TABLE, vol index 5
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_VOL_CAL cal type = 12
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> send_audstrmtable
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AUDPROC_STREAM_TABLE_V2
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> audstrm_cal->cal_type.cal_data.cal_size = 16
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> send_afe_topology
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_TOPOLOGY_ID
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> GET_AFE_TOPOLOGY_ID for adcd_id 15, Topology Id 1025e
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> send_afe_cal
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> ACDB_CMD_GET_AFE_COMMON_TABLE
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> AUDIO_SET_AFE_CAL
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> send_hw_delay : acdb_id = 15 path = 0
+12-04 06:18:42.400  3022  3470 D ACDB-LOADER: ACDB -> ACDB_AVSYNC_INFO: ACDB_CMD_GET_DEVICE_PROPERTY
+12-04 06:18:42.400  3022  3470 D audio_hw_primary: enable_audio_route: apply mixer and update path: low-latency-playback quat_i2s
+12-04 06:18:42.400  3523 11266 D ActivityTrigger: ActivityTrigger activityPauseTrigger 
+12-04 06:18:42.402  3022  3470 D audio_hw_primary: select_devices: done
+12-04 06:18:42.405  3022  3470 D msm8974_platform: platform_set_channel_map mixer_ctl_name:Playback Channel Map15
+12-04 06:18:42.405  3022  3470 D msm8974_platform: platform_set_channel_map: set mapping(1 2 0 0 0 0 0 0) for channel:2
+12-04 06:18:42.408 31951 31951 I Process : Sending signal. PID: 31951 SIG: 9
+12-04 06:18:42.428  3523  4080 I WindowManager: WIN DEATH: Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity}
+12-04 06:18:42.428  3523  4934 D GraphicsStats: Buffer count: 8
+12-04 06:18:42.429  3523  4916 I ActivityManager: Process android.income.expense (pid 31951) has died
+12-04 06:18:42.429  3523  4916 D ActivityManager: cleanUpApplicationRecord -- 31951
+12-04 06:18:42.432  3523  5078 I WindowManager: WIN DEATH: Window{e432f39 u0 android.income.expense/android.income.expense.ui.MainActivity}
+12-04 06:18:42.441  3523 31989 D DropBoxManagerService: file :: /data/system/dropbox/data_app_crash@2017-12-04-06_18_42_397.txt
+12-04 06:18:42.447  3523  4916 I ActivityManager: Start proc 31991:android.income.expense/u0a611 for activity android.income.expense/.ui.MainActivity
+12-04 06:18:42.447  3523  4916 V BoostFramework: BoostFramework() : mPerf = com.qualcomm.qti.Performance@add5153
+12-04 06:18:42.448 31991 31991 I art     : Late-enabling -Xcheck:jni
+12-04 06:18:42.456  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{a507b92 u0 android.income.expense/android.income.expense.ui.AddInExActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.469  3022  3470 D audio_hw_primary: start_output_stream: exit
+12-04 06:18:42.492 31991 31991 W System  : ClassLoader referenced unknown path: /data/app/android.income.expense-2/lib/arm64
+12-04 06:18:42.500  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{f2397cb u0 Starting android.income.expense} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.501 31991 31991 V Font    : Change font:1
+12-04 06:18:42.508  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{f2397cb u0 Starting android.income.expense} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.518 31991 31991 W art     : Before Android 4.1, method android.graphics.PorterDuffColorFilter android.support.graphics.drawable.VectorDrawableCompat.updateTintFilter(android.graphics.PorterDuffColorFilter, android.content.res.ColorStateList, android.graphics.PorterDuff$Mode) would have incorrectly overridden the package-private method in android.graphics.drawable.Drawable
+12-04 06:18:42.576 31991 32006 D AppTracker: App Event: start
+12-04 06:18:42.605  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.606  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.609  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.613 31991 32007 I Adreno  : QUALCOMM build                   : 853a1ff, I9c435c2712
+12-04 06:18:42.613 31991 32007 I Adreno  : Build Date                       : 01/10/17
+12-04 06:18:42.613 31991 32007 I Adreno  : OpenGL ES Shader Compiler Version: XE031.09.00.04
+12-04 06:18:42.613 31991 32007 I Adreno  : Local Branch                     : 
+12-04 06:18:42.613 31991 32007 I Adreno  : Remote Branch                    : 
+12-04 06:18:42.613 31991 32007 I Adreno  : Remote Branch                    : 
+12-04 06:18:42.613 31991 32007 I Adreno  : Reconstruct Branch               : 
+12-04 06:18:42.618 31991 32007 I OpenGLRenderer: Initialized EGL, version 1.4
+12-04 06:18:42.618 31991 32007 D OpenGLRenderer: Swap behavior 1
+12-04 06:18:42.653  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.656  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.664 15688 15688 I PhenotypeIme: refreshConfiguration() : Force = false : UpdateAvailable = false : Age = 1 minutes : MaxAge = 720 minutes
+12-04 06:18:42.665 15688 15688 I EmojiDataExtension: onDeactivate() : Locale = en_GB
+12-04 06:18:42.665  3523  3594 I ActivityManager: Displayed android.income.expense/.ui.MainActivity: +230ms
+12-04 06:18:42.667 15688 15688 I GoogleInputMethod: onStartInput() : Dummy InputConnection bound
+12-04 06:18:42.669  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.683  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.693  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.711  3022  3285 D APM_AudioPolicyManager: stopOutput() output 13, stream 1, session 57
+12-04 06:18:42.711  3022  3285 D AudioPolicyManagerCustom: getNewOutputDevice() selected device 0
+12-04 06:18:42.711  3022  3285 D APM_AudioPolicyManager: setOutputDevice() device 0000 delayMs 96
+12-04 06:18:42.867  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.875  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:42.897  3523  3564 D StatusBarManagerService: manageDisableList userId=0 what=0x0 pkg=Window{12d3543 u0 android.income.expense/android.income.expense.ui.MainActivity} token=android.os.Binder@3acea02 which=1
+12-04 06:18:43.881  3523  3523 I DeviceIdleController: updateChargingLocked: charging=true
+12-04 06:18:43.881  3523  3523 I DeviceIdleController: becomeActiveLocked, reason = charging
+12-04 06:18:43.889  4905  5051 W QCNEJ   : |CORE| CNE received unexpected action: android.intent.action.BATTERY_CHANGED
+12-04 06:18:43.895  4198  4198 I BatteryController:  fireBatteryLevelChanged mLevel:100 PluggedIn:true Charging:true Fastcharge:false show:false style:0
+12-04 06:18:43.900  4398  4398 E QtiImsExtUtils: getConfigForPhoneId subId is invalid
+12-04 06:18:43.900  4398  4398 E QtiImsExtUtils: isCarrierConfigEnabled bundle is null
