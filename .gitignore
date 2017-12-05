@@ -1,3 +1,4 @@
+.gitignore
 .idea
 app/app.iml
 build/android-profile/
