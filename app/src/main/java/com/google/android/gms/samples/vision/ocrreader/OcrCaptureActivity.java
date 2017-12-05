@@ -27,6 +27,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.income.expense.R;
+import android.income.expense.ui.AddInExActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -55,6 +56,8 @@ import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Activity for the Ocr Detecting app.  This app detects text and displays the value with the
@@ -62,6 +65,12 @@ import java.util.Locale;
  * size, and contents of each TextBlock.
  */
 public final class OcrCaptureActivity extends AppCompatActivity {
+
+    public enum ExtractType{
+        TEXT,
+        AMOUNT
+    }
+
     private static final String TAG = "OcrCaptureActivity";
 
     // Intent request code to handle updating play services if needed.
@@ -328,11 +337,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
             text = graphic.getTextBlock();
             if (text != null && text.getValue() != null) {
                 Log.d(TAG, "text data is being spoken! " + text.getValue());
-                String value = "description";
+                ExtractType type = ExtractType.TEXT;
                 if(!TextUtils.isEmpty(description)){
-                    value = "amount";
+                    type = ExtractType.AMOUNT;
                 }
-               showDialog(value, text.getValue());
+               showDialog(type, text.getValue());
             }
             else {
                 Log.d(TAG, "text data is null");
@@ -435,29 +444,49 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         }
     }
 
-    private void showDialog(final String value, final String text){
+    private void showDialog(final ExtractType type, String text){
+        if(type == ExtractType.AMOUNT){
+            Pattern p = Pattern.compile("-?[\\d,\\,,\\.]+");
+            Matcher m = p.matcher(text);
+            if(m.groupCount() > 1){
+                Snackbar.make(mGraphicOverlay, "More than one value, pinch and tap", Snackbar.LENGTH_SHORT).show();
+                return;
+            }
+            if (m.find()) {
+               text = m.group();
+            }
+        }
+        final String actualtext = text;
         AlertDialog builder = new AlertDialog.Builder(this)
                 .setTitle("Use text")
-                .setMessage("Use this text as "+value+"?")
+                .setMessage("Use this '"+text+"' as "+type+"?")
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (value.toLowerCase()){
-                            case "description":
-                                description = text;
+                        switch (type){
+                            case TEXT:
+                                description = actualtext;
                                 break;
-                            case "amount":
-                                amount = text;
+                            case AMOUNT:
+                                amount = actualtext;
                                 break;
                         }
 
                         if(!TextUtils.isEmpty(description) && !TextUtils.isEmpty(amount)){
                             Snackbar.make(mGraphicOverlay, description+" : "+amount, Snackbar.LENGTH_SHORT).show();
-                            finish();
+                            startAddActivity();
                         }
                     }
                 })
                 .create();
         builder.show();
+    }
+
+    private void startAddActivity(){
+        Intent intent = new Intent(this, AddInExActivity.class);
+        intent.putExtra(AddInExActivity.EXTRA_PARAM_DESCRIPTION, description);
+        intent.putExtra(AddInExActivity.EXTRA_PARAM_AMOUNT, amount);
+        startActivity(intent);
+        finish();
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             InEx.COLUMN_AMOUNT + " REAL NOT NULL, " +
             InEx.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
             InEx.COLUMN_IS_INCOME + " INTEGER DEFAULT 0, " +
-            InEx.COLUMN_TIME + " TEXT NOT NULL" +
+            InEx.COLUMN_DATE + " TEXT NOT NULL" +
             ");";
 
     public boolean save(InEx value){
@@ -57,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(InEx.COLUMN_AMOUNT, value.getAmount());
         cv.put(InEx.COLUMN_DESCRIPTION, value.getDescription());
-        cv.put(InEx.COLUMN_TIME, value.getTime());
+        cv.put(InEx.COLUMN_DATE, value.getTime());
         cv.put(InEx.COLUMN_IS_INCOME, value.isIncome() ? 1 : 0);
 
         if(value.getId() == -1){
@@ -97,25 +98,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor query(int day, int month, int year){
 
-        StringBuffer query = new StringBuffer();
-        query.append((year == -1) ? ("\\d{4}-") : (year+"-"));
-        query.append((month == -1) ? ("\\d{2}-") : (format(month)+"-"));
-        query.append((day == -1) ? ("\\d{2}") : (format(day)));
-        query.append(" \\d{2}:\\d{2}");
+        String queryString = queryString(day, month, year);
+        return getReadableDatabase().query(InEx.class.getSimpleName(), null, queryString, null, null, null, null);
+    }
 
-        return getReadableDatabase().query(InEx.class.getSimpleName(), null, InEx.COLUMN_TIME+" LIKE ?", new String[]{"%"+query.toString()+"%"}, null, null, null);
+    private String queryString(int day, int month, int year){
+        StringBuffer value = new StringBuffer();
+        if(year != -1){
+            value.append(year);
+        }
+        if(month != -1){
+            if(!TextUtils.isEmpty(value)){
+                value.append("/");
+            }
+            value.append(format(month));
+        }
+        if(day != -1){
+            if(!TextUtils.isEmpty(value)){
+                value.append("/");
+            }
+            value.append(format(day));
+        }
+
+        String queryString = null;
+        if(!TextUtils.isEmpty(value)){
+            queryString = InEx.COLUMN_DATE+" LIKE '%"+value.toString()+"%'";
+        }
+
+        return  queryString;
+    }
+
+    public Cursor test(){
+        //Cursor cursor = getReadableDatabase().query(InEx.class.getSimpleName(),new String[]{"strftime('%Y-%m-%d', "+InEx.COLUMN_DATE+")"}, null, null, null, null, null);
+        String query = "SELECT date FROM InEx WHERE date LIKE '%2017/12/05%'";
+        Cursor cursor = getReadableDatabase().rawQuery(query, null);
+        return cursor;
     }
 
     public List<InEx> get(int day, int month, int year){
         List<InEx> values = new ArrayList<>();
 
-        StringBuffer query = new StringBuffer();
-        query.append((year == -1) ? ("\\d{4}") : (year+"-"));
-        query.append((month == -1) ? ("\\d{2}") : (format(month)+"-"));
-        query.append((day == -1) ? ("\\d{2}") : (format(day)));
-        query.append(" \\d{2}:\\d{2}");
+        String queryString = queryString(day, month, year);
 
-        Cursor cursor = getReadableDatabase().query(InEx.class.getSimpleName(), null, InEx.COLUMN_TIME+" LIKE ?", new String[]{"%"+query.toString()+"%"}, null, null, null);
+        Cursor cursor = getReadableDatabase().query(InEx.class.getSimpleName(), null, queryString, null, null, null, null);
         if(cursor != null){
             if(cursor.moveToFirst()){
                 do{

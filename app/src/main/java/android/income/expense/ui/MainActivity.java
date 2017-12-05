@@ -8,7 +8,6 @@ import android.income.expense.data.DatabaseHelper;
 import android.income.expense.data.InEx;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.samples.vision.ocrreader.OcrCaptureActivity;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-        Cursor cursor = dbHelper.query(-1,-1,-1);
+        Calendar c= Calendar.getInstance();
+        Cursor cursor = dbHelper.query(c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.MONTH),c.get(Calendar.YEAR));
         if(cursor != null){
             mListAdapter = new ContentsAdapter(cursor);
             mListView.setAdapter(mListAdapter);
@@ -54,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(mListAdapter != null){
-            Cursor cursor = DatabaseHelper.getInstance(this).query(-1,-1,-1);
+            Calendar c = Calendar.getInstance();
+            Cursor cursor = DatabaseHelper.getInstance(this).query(-1,-1,c.get(Calendar.YEAR));
+            //Cursor cursor = DatabaseHelper.getInstance(this).query(-1,-1,-1);
             if(cursor != null) {
                 mListAdapter.changeCursor(cursor);
             }
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         public void bindView(View view, Context context, Cursor cursor) {
             ((TextView)view.findViewById(R.id.inex_item_amount)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
             ((TextView)view.findViewById(R.id.inex_item_description)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)));
-            ((TextView)view.findViewById(R.id.inex_item_date)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_TIME)));
+            ((TextView)view.findViewById(R.id.inex_item_date)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE)));
         }
     }
 }

@@ -14,13 +14,13 @@ import java.util.Date;
 
 public abstract class InEx {
 
-    public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd");
 
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_AMOUNT = "amount";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_IS_INCOME = "is_income";
-    public static final String COLUMN_TIME = "time";
+    public static final String COLUMN_DATE = "date";
     
     
     @SerializedName(COLUMN_ID)
@@ -35,7 +35,7 @@ public abstract class InEx {
     @SerializedName(COLUMN_IS_INCOME)
     private boolean isIncome;
 
-    @SerializedName(COLUMN_TIME)
+    @SerializedName(COLUMN_DATE)
     private String time;
     
     protected InEx(String description, float amount, boolean isIncome){
@@ -90,7 +90,7 @@ public abstract class InEx {
                     cursor.getFloat(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
         }
         inx.id = cursor.getLong(cursor.getColumnIndex(InEx.COLUMN_ID));
-        inx.time = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_TIME));
+        inx.time = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE));
         return inx;
     }
 }

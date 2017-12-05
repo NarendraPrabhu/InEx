@@ -30,6 +30,8 @@ import java.util.Date;
 
 public class AddInExActivity extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 
+    public static final String EXTRA_PARAM_DESCRIPTION = AddInExActivity.class.getPackage().getName()+".DESCRIPTION";
+    public static final String EXTRA_PARAM_AMOUNT = AddInExActivity.class.getPackage().getName()+".AMOUNT";
 
     private TextView labelDescriptionTextView = null;
     private EditText descriptionEditText = null;
@@ -59,6 +61,21 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
         setDate(c);
         saveButton.setOnClickListener(this);
         inexOptionsSpinner.setOnItemSelectedListener(this);
+
+        String amount = getIntent().getStringExtra(EXTRA_PARAM_AMOUNT);
+        try {
+            Float.parseFloat(amount);
+            amountEditText.setText(amount);
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+        }catch (NumberFormatException nfe){
+            nfe.printStackTrace();
+        }
+        String description = getIntent().getStringExtra(EXTRA_PARAM_DESCRIPTION);
+
+        if(!TextUtils.isEmpty(description)){
+           descriptionEditText.setText(description);
+        }
     }
 
     private void setDate(Calendar c){
