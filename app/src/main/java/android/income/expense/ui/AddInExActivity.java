@@ -2,6 +2,7 @@ package android.income.expense.ui;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.income.expense.R;
 import android.income.expense.data.DatabaseHelper;
 import android.income.expense.data.Expense;
@@ -127,6 +128,7 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
                     inEx = new Income(description, amount, time);
                 }
                 if(DatabaseHelper.getInstance(this).save(inEx)){
+                    startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }else{
                     Toast.makeText(this,"Failed", Toast.LENGTH_SHORT).show();

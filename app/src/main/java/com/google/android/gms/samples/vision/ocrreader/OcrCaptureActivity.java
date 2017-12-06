@@ -28,9 +28,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.income.expense.R;
 import android.income.expense.ui.AddInExActivity;
-import android.os.Build;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -42,20 +40,20 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,7 +62,7 @@ import java.util.regex.Pattern;
  * rear facing camera. During detection overlay graphics are drawn to indicate the position,
  * size, and contents of each TextBlock.
  */
-public final class OcrCaptureActivity extends AppCompatActivity {
+public final class OcrCaptureActivity extends AppCompatActivity implements View.OnClickListener{
 
     public enum ExtractType{
         TEXT,
@@ -102,6 +100,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         super.onCreate(bundle);
         setContentView(R.layout.ocr_capture);
 
+        findViewById(R.id.ocr_capture_remove_amount).setOnClickListener(this);
+        findViewById(R.id.ocr_capture_remove_description).setOnClickListener(this);
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
 
@@ -124,10 +124,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(mGraphicOverlay, "Show some bill, and tap on some text for description",
-                Snackbar.LENGTH_LONG)
-                .show();
-
+        ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_amount);
     }
 
     /**
@@ -200,7 +197,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 Log.w(TAG, getString(R.string.low_storage_error));
             }
         }
-
         textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
         // Create the mCameraSource using the TextRecognizer.
         mCameraSource =
@@ -330,7 +326,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
      * @return true if the tap was on a TextBlock
      */
     private boolean onTap(float rawX, float rawY) {
-        // TODO: Speak the text when the user taps on screen.
         OcrGraphic graphic = mGraphicOverlay.getGraphicAtLocation(rawX, rawY);
         TextBlock text = null;
         if (graphic != null) {
@@ -357,6 +352,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
+
             return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
     }
@@ -466,14 +462,18 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                         switch (type){
                             case TEXT:
                                 description = actualtext;
+                                findViewById(R.id.ocr_capture_description_entity).setVisibility(View.VISIBLE);
+                                ((TextView)findViewById(R.id.ocr_capture_captured_description)).setText(description);
+                                ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_amount);
                                 break;
                             case AMOUNT:
                                 amount = actualtext;
+                                findViewById(R.id.ocr_capture_amount_entity).setVisibility(View.VISIBLE);
+                                ((TextView)findViewById(R.id.ocr_capture_captured_amount)).setText(amount);
                                 break;
                         }
 
                         if(!TextUtils.isEmpty(description) && !TextUtils.isEmpty(amount)){
-                            Snackbar.make(mGraphicOverlay, description+" : "+amount, Snackbar.LENGTH_SHORT).show();
                             startAddActivity();
                         }
                     }
@@ -488,5 +488,23 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         intent.putExtra(AddInExActivity.EXTRA_PARAM_AMOUNT, amount);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.ocr_capture_remove_description:
+                description = null;
+                findViewById(R.id.ocr_capture_description_entity).setVisibility(View.GONE);
+                ((TextView)findViewById(R.id.ocr_capture_captured_description)).setText("");
+                ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_description);
+                break;
+            case R.id.ocr_capture_remove_amount:
+                amount = null;
+                findViewById(R.id.ocr_capture_amount_entity).setVisibility(View.GONE);
+                ((TextView)findViewById(R.id.ocr_capture_captured_amount)).setText(description);
+                ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_amount);
+                break;
+        }
     }
 }

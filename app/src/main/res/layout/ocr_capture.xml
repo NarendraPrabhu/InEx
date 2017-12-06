@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
@@ -18,5 +18,107 @@
             android:layout_height="match_parent" />
 
     </com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#55000000"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/ocr_capture_helper_text"
+            android:padding="10dp"
+            android:text="@string/helper_description"
+            android:textColor="#FFAAAAAA"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_below="@id/ocr_capture_helper_text"
+            android:id="@+id/ocr_capture_description_entity"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/ocr_capture_label_description"
+                android:paddingRight="20dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="@string/label_description"
+                android:textColor="#FFAAAAAA"
+                android:textSize="13sp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_below="@id/ocr_capture_label_description"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:id="@+id/ocr_capture_captured_description"
+                android:textColor="#FFEEEEEE"
+                android:textSize="13sp"
+                android:layout_height="wrap_content"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/ocr_capture_remove_description"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_menu_delete"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/ocr_capture_description_entity"
+            android:id="@+id/ocr_capture_amount_entity"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/ocr_capture_label_amount"
+                android:paddingLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:paddingRight="20dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="@string/label_amount"
+                android:textColor="#FFAAAAAA"
+                android:textSize="13sp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_below="@id/ocr_capture_label_amount"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:id="@+id/ocr_capture_captured_amount"
+                android:textColor="#FFEEEEEE"
+                android:textSize="13sp"
+                android:layout_height="wrap_content"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/ocr_capture_remove_amount"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_menu_delete"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</FrameLayout>

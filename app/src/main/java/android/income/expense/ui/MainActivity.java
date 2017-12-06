@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ListView mListView;
     private ContentsAdapter mListAdapter;
@@ -35,16 +35,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddInExActivity.class));
-            }
-        });
+        findViewById(R.id.fab).setOnClickListener(this);
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-        Calendar c= Calendar.getInstance();
-        Cursor cursor = dbHelper.query(c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.MONTH),c.get(Calendar.YEAR));
+        Cursor cursor = dbHelper.query(-1, -1, -1);
         if(cursor != null){
             mListAdapter = new ContentsAdapter(cursor);
             mListView.setAdapter(mListAdapter);
@@ -54,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        refresh();
+    }
+
+    private void refresh(){
         if(mListAdapter != null){
-            Calendar c = Calendar.getInstance();
-            Cursor cursor = DatabaseHelper.getInstance(this).query(-1,-1,c.get(Calendar.YEAR));
-            //Cursor cursor = DatabaseHelper.getInstance(this).query(-1,-1,-1);
-            if(cursor != null) {
-                mListAdapter.changeCursor(cursor);
-            }
+            Cursor cursor = DatabaseHelper.getInstance(this).query(-1, -1, -1);
+            mListAdapter.swapCursor(cursor);
         }
     }
 
@@ -87,14 +80,32 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
             View v = LayoutInflater.from(context).inflate(R.layout.item_inex, viewGroup, false);
+            v.findViewById(R.id.inex_item_delete).setOnClickListener(MainActivity.this);
             return v;
         }
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
+            view.findViewById(R.id.inex_item_delete).setTag(cursor.getLong(cursor.getColumnIndex(InEx.COLUMN_ID)));
             ((TextView)view.findViewById(R.id.inex_item_amount)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
             ((TextView)view.findViewById(R.id.inex_item_description)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)));
             ((TextView)view.findViewById(R.id.inex_item_date)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE)));
+        }
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.inex_item_delete:
+                long id = (Long)view.getTag();
+                if(DatabaseHelper.getInstance(this).delete(id)){
+                    refresh();
+                }
+                break;
+            case R.id.fab:
+                startActivity(new Intent(MainActivity.this, AddInExActivity.class));
+                break;
         }
     }
 }
