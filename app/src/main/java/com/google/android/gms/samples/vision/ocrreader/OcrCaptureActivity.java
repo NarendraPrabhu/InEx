@@ -124,7 +124,7 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_amount);
+        ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_description);
     }
 
     /**
