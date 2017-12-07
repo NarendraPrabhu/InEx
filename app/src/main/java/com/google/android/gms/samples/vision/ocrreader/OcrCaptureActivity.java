@@ -485,6 +485,9 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
     private void startAddActivity(){
         Intent intent = new Intent(this, AddInExActivity.class);
         intent.putExtra(AddInExActivity.EXTRA_PARAM_DESCRIPTION, description);
+        if(amount.contains(",")){
+            amount = amount.replace(",","");
+        }
         intent.putExtra(AddInExActivity.EXTRA_PARAM_AMOUNT, amount);
         startActivity(intent);
         finish();

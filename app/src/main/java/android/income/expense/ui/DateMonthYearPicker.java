@@ -1,11 +1,15 @@
 package android.income.expense.ui;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.income.expense.R;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,6 +43,7 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
     private int textSize = 13;
     private int textColor = android.R.color.black;
     private int typeface = Typeface.NORMAL;
+    private int textViewResourceId = -1;
     int minimumHeight = 40;
 
     public interface OnDateChangeListener{
@@ -52,11 +57,17 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
 
     public DateMonthYearPicker(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DateMonthYearPicker);
+        textViewResourceId = a.getResourceId(R.styleable.DateMonthYearPicker_textViewResource, -1);
+        a.recycle();
         init();
     }
 
     public DateMonthYearPicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.DateMonthYearPicker);
+        textViewResourceId = a.getResourceId(R.styleable.DateMonthYearPicker_textViewResource, -1);
+        a.recycle();
         init();
     }
 
@@ -77,12 +88,9 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         currentMonth = c.get(Calendar.MONTH)+1;
         currentYear = c.get(Calendar.YEAR);
 
-        daysSpinner = new Spinner(getContext());
-        daysSpinner.setOnItemSelectedListener(this);
-        monthsSpinner = new Spinner(getContext());
-        monthsSpinner.setOnItemSelectedListener(this);
-        yearSpinner = new Spinner(getContext());
-        yearSpinner.setOnItemSelectedListener(this);
+        daysSpinner = getSpinner();
+        monthsSpinner = getSpinner();
+        yearSpinner = getSpinner();
 
         daysAdapter = new DaysAdapter();
         monthsAdapter = new MonthsAdapter();
@@ -101,6 +109,13 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         daysSpinner.setSelection(currentDay);
         monthsSpinner.setSelection(currentMonth);
         yearSpinner.setSelection(currentYear-1970);
+    }
+
+    private Spinner getSpinner(){
+        Spinner spinner = new Spinner(getContext());
+        spinner.setPopupBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.dk_gray)));
+        spinner.setOnItemSelectedListener(this);
+        return spinner;
     }
 
     private LayoutParams getParams(int i){
@@ -205,14 +220,19 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
     }
 
     private TextView createTextView(Context context){
-        TextView view = new TextView(getContext());
-        view.setGravity(Gravity.CENTER);
-        view.setTextSize(textSize);
-        view.setTypeface(null, typeface);
-        view.setMinimumHeight(minimumHeight);
-        view.setTextColor(getContext().getResources().getColor(textColor));
-        Spinner.LayoutParams lp = new Spinner.LayoutParams(Spinner.LayoutParams.MATCH_PARENT, Spinner.LayoutParams.MATCH_PARENT);
-        view.setLayoutParams(lp);
+        TextView view = null;
+        if(textViewResourceId == -1) {
+            view = new TextView(getContext());
+            view.setGravity(Gravity.CENTER);
+            view.setTextSize(textSize);
+            view.setTypeface(null, typeface);
+            view.setMinimumHeight(minimumHeight);
+            view.setTextColor(getContext().getResources().getColor(textColor));
+            Spinner.LayoutParams lp = new Spinner.LayoutParams(Spinner.LayoutParams.MATCH_PARENT, Spinner.LayoutParams.MATCH_PARENT);
+            view.setLayoutParams(lp);
+        }else{
+            view = (TextView) LayoutInflater.from(context).inflate(textViewResourceId, null);
+        }
         return view;
     }
 
@@ -228,7 +248,11 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         }
 
         if(adapterView.getAdapter() instanceof MonthsAdapter){
-            currentMonth = (Integer)((MonthsAdapter)adapterView.getAdapter()).getItem(i);
+            int month = (Integer)((MonthsAdapter)adapterView.getAdapter()).getItem(i);
+            if(month != currentMonth){
+                currentDay = 0;
+            }
+            currentMonth = month;
         }
 
         if(adapterView.getAdapter() instanceof YearsAdapter){

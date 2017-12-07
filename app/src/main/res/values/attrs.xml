@@ -4,6 +4,7 @@
         <attr name="textSize" format="dimension"/>
         <attr name="textColor" format="integer"/>
         <attr name="textStyle" format="string"/>
+        <attr name="textViewResource" format="reference"/>
     </declare-styleable>
 
 </resources>

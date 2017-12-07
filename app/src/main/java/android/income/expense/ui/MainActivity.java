@@ -3,6 +3,7 @@ package android.income.expense.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.income.expense.R;
 import android.income.expense.data.InEx;
 import android.income.expense.data.InExManager;
@@ -26,19 +27,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private InExManager mInExManager;
     private DateMonthYearPicker mDateMonthYearPicker;
     private TextView mTotalTextView;
+    private String amountFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mInExManager = InExManager.getInstance(this);
+        amountFormat = getResources().getString(R.string.amount);
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         findViewById(R.id.fab).setOnClickListener(this);
 
-        mListView = (ListView) findViewById(R.id.main_list);
+        mListView = findViewById(R.id.main_list);
+        addEmptyHeaderAndFooter();
         mDateMonthYearPicker = findViewById(R.id.main_date_month_year_picker);
         mDateMonthYearPicker.setOnDateChangeListener(this);
         mTotalTextView = findViewById(R.id.main_total_amount);
@@ -81,10 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class ContentsAdapter extends CursorAdapter{
 
         private int itemPadding = 6;
-        private String amountFormat;
+
         public ContentsAdapter(Cursor c) {
             super(MainActivity.this, c, true);
-            amountFormat = getResources().getString(R.string.amount);
             itemPadding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics());
         }
 
@@ -130,9 +133,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTotal();
     }
 
+    private void addEmptyHeaderAndFooter(){
+        mListView.addHeaderView(getEmptyView());
+        mListView.addFooterView(getEmptyView());
+    }
+
+    private View getEmptyView(){
+        View v = new View(this);
+        int height = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+        v.setMinimumHeight(height);
+        v.setBackgroundColor(Color.TRANSPARENT);
+        return v;
+    }
+
     private void setTotal(){
         int total = mInExManager.getTotal(mDateMonthYearPicker.getCurrentDay(), mDateMonthYearPicker.getCurrentMonth(), mDateMonthYearPicker.getCurrentYear());
-        mTotalTextView.setText(String.format(getResources().getString(R.string.total), ""+total));
+        String totalAmount = String.format(amountFormat, ""+total);
+        mTotalTextView.setText(String.format(getResources().getString(R.string.total), totalAmount));
     }
 
 }

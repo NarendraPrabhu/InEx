@@ -20,7 +20,7 @@
     </com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#55000000"
+        android:background="@color/dk_gray"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:id="@+id/ocr_capture_helper_text"
             android:padding="10dp"
             android:text="@string/helper_description"
-            android:textColor="#FFAAAAAA"
+            android:textColor="@color/translucent"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>
@@ -53,7 +53,7 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:text="@string/label_description"
-                android:textColor="#FFAAAAAA"
+                android:textColor="@color/translucent"
                 android:textSize="13sp"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -64,7 +64,7 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:id="@+id/ocr_capture_captured_description"
-                android:textColor="#FFEEEEEE"
+                android:textColor="@color/translucent"
                 android:textSize="13sp"
                 android:layout_height="wrap_content"/>
             <ImageButton

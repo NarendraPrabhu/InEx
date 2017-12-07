@@ -9,7 +9,7 @@ import android.database.Cursor;
 public class Income extends InEx {
 
     public Income(String description, float amount, long time) {
-        super(description, amount, true, time);
+        super(description, -amount, true, time);
     }
 
     public Income(String description, float amount) {
