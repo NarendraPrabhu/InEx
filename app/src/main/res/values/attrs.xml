@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DateMonthYearPicker">
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="integer"/>
+        <attr name="textStyle" format="string"/>
+    </declare-styleable>
+
+</resources>

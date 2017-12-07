@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.income.expense.R;
-import android.income.expense.data.DatabaseHelper;
 import android.income.expense.data.Expense;
 import android.income.expense.data.InEx;
+import android.income.expense.data.InExManager;
 import android.income.expense.data.Income;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,11 +43,14 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
     private Button saveButton = null;
     private DatePickerDialog datePickerDialog = null;
 
+    private InExManager mInExManager;
+
     private DateFormat DATE_FORMATTER = new SimpleDateFormat("dd - MM - yyyy");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mInExManager = InExManager.getInstance(this);
         setContentView(R.layout.activity_add_inex);
         labelDescriptionTextView = ((TextView)findViewById(R.id.add_inex_label_description));
         descriptionEditText = ((EditText)findViewById(R.id.add_inex_description));
@@ -127,7 +130,7 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
                 }else{
                     inEx = new Income(description, amount, time);
                 }
-                if(DatabaseHelper.getInstance(this).save(inEx)){
+                if(mInExManager.save(inEx)){
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }else{

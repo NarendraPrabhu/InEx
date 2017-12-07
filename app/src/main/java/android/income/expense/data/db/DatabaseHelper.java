@@ -1,10 +1,11 @@
-package android.income.expense.data;
+package android.income.expense.data.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.income.expense.data.InEx;
 import android.text.TextUtils;
 
 import java.util.ArrayList;
@@ -69,8 +70,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnValue;
     }
 
-    public void delete(InEx value){
-        delete(value.getId());
+    public boolean delete(InEx value){
+        return delete(value.getId());
     }
 
     public boolean delete(long id){
@@ -96,24 +97,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return value+"";
     }
 
-    public Cursor query(int day, int month, int year){
+    public int getTotal(int day, int month, int year){
+        int total = 0;
+        String query = queryString(day, month, year);
+        Cursor cursor = getReadableDatabase().query(InEx.class.getSimpleName(), new String[]{"SUM("+InEx.COLUMN_AMOUNT+")"}, query, null, null, null, null);
+        if(cursor != null) {
+            if(cursor.moveToFirst() && cursor.getCount() == 1){
+                total = cursor.getInt(0);
+            }
+            cursor = null;
+        }
+        return total;
+    }
 
+    public Cursor query(int day, int month, int year){
         String queryString = queryString(day, month, year);
         return getReadableDatabase().query(InEx.class.getSimpleName(), null, queryString, null, null, null, null);
     }
 
     private String queryString(int day, int month, int year){
         StringBuffer value = new StringBuffer();
-        if(year != -1){
+        if(year != 0){
             value.append(year);
         }
-        if(month != -1){
+        if(month != 0){
             if(!TextUtils.isEmpty(value)){
                 value.append("/");
             }
             value.append(format(month));
         }
-        if(day != -1){
+        if(day != 0){
             if(!TextUtils.isEmpty(value)){
                 value.append("/");
             }
@@ -128,13 +141,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return  queryString;
     }
 
-    public Cursor test(){
-        //Cursor cursor = getReadableDatabase().query(InEx.class.getSimpleName(),new String[]{"strftime('%Y-%m-%d', "+InEx.COLUMN_DATE+")"}, null, null, null, null, null);
-        String query = "SELECT date FROM InEx WHERE date LIKE '%2017/12/05%'";
-        Cursor cursor = getReadableDatabase().rawQuery(query, null);
-        return cursor;
-    }
-
     public List<InEx> get(int day, int month, int year){
         List<InEx> values = new ArrayList<>();
 
@@ -147,7 +153,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     values.add(InEx.fromCursor(cursor));
                 }while (cursor.moveToNext());
             }
-            cursor = null;
         }
         return values;
     }

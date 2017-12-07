@@ -4,44 +4,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.income.expense.R;
-import android.income.expense.data.DatabaseHelper;
 import android.income.expense.data.InEx;
+import android.income.expense.data.InExManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.Calendar;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateMonthYearPicker.OnDateChangeListener{
 
     private ListView mListView;
     private ContentsAdapter mListAdapter;
+    private InExManager mInExManager;
+    private DateMonthYearPicker mDateMonthYearPicker;
+    private TextView mTotalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mInExManager = InExManager.getInstance(this);
+
         setContentView(R.layout.activity_main);
-        mListView = (ListView) findViewById(R.id.main_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         findViewById(R.id.fab).setOnClickListener(this);
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-        Cursor cursor = dbHelper.query(-1, -1, -1);
-        if(cursor != null){
-            mListAdapter = new ContentsAdapter(cursor);
-            mListView.setAdapter(mListAdapter);
-        }
+
+        mListView = (ListView) findViewById(R.id.main_list);
+        mDateMonthYearPicker = findViewById(R.id.main_date_month_year_picker);
+        mDateMonthYearPicker.setOnDateChangeListener(this);
+        mTotalTextView = findViewById(R.id.main_total_amount);
     }
 
     @Override
@@ -51,10 +51,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void refresh(){
-        if(mListAdapter != null){
-            Cursor cursor = DatabaseHelper.getInstance(this).query(-1, -1, -1);
+        Cursor cursor = mInExManager.query(mDateMonthYearPicker.getCurrentDay(), mDateMonthYearPicker.getCurrentMonth(), mDateMonthYearPicker.getCurrentYear());
+        if(cursor == null){
+            return;
+        }
+        if(mListAdapter == null){
+            mListAdapter = new ContentsAdapter(cursor);
+            mListView.setAdapter(mListAdapter);
+        }else{
             mListAdapter.swapCursor(cursor);
         }
+        setTotal();
     }
 
     @Override
@@ -73,8 +80,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private class ContentsAdapter extends CursorAdapter{
 
+        private int itemPadding = 6;
+        private String amountFormat;
         public ContentsAdapter(Cursor c) {
             super(MainActivity.this, c, true);
+            amountFormat = getResources().getString(R.string.amount);
+            itemPadding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics());
         }
 
         @Override
@@ -87,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             view.findViewById(R.id.inex_item_delete).setTag(cursor.getLong(cursor.getColumnIndex(InEx.COLUMN_ID)));
-            ((TextView)view.findViewById(R.id.inex_item_amount)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
+            String amountValue = String.format(amountFormat, cursor.getString(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
+            ((TextView)view.findViewById(R.id.inex_item_amount)).setText(amountValue);
             ((TextView)view.findViewById(R.id.inex_item_description)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)));
             ((TextView)view.findViewById(R.id.inex_item_date)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE)));
         }
@@ -99,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.inex_item_delete:
                 long id = (Long)view.getTag();
-                if(DatabaseHelper.getInstance(this).delete(id)){
+                if(mInExManager.delete(id)){
                     refresh();
                 }
                 break;
@@ -108,4 +120,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    @Override
+    public void onDateChange(int day, int month, int year) {
+        Cursor cursor = mInExManager.query(day, month, year);
+        if(cursor != null) {
+            mListAdapter.swapCursor(cursor);
+        }
+        setTotal();
+    }
+
+    private void setTotal(){
+        int total = mInExManager.getTotal(mDateMonthYearPicker.getCurrentDay(), mDateMonthYearPicker.getCurrentMonth(), mDateMonthYearPicker.getCurrentYear());
+        mTotalTextView.setText(String.format(getResources().getString(R.string.total), ""+total));
+    }
+
 }
