@@ -112,7 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor query(int day, int month, int year){
         String queryString = queryString(day, month, year);
-        return getReadableDatabase().query(InEx.class.getSimpleName(), null, queryString, null, null, null, null);
+        return getReadableDatabase().query(InEx.class.getSimpleName(), null, queryString, null, null, null, InEx.COLUMN_DATE, "ASC");
     }
 
     private String queryString(int day, int month, int year){
