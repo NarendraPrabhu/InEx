@@ -89,12 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private class ContentsAdapter extends CursorAdapter{
 
-        private int itemPadding = 6;
         private SimpleDateFormat readableFormatter = new SimpleDateFormat("MMM dd, YYYY");
 
         public ContentsAdapter(Cursor c) {
             super(MainActivity.this, c, true);
-            itemPadding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, getResources().getDisplayMetrics());
         }
 
         @Override
