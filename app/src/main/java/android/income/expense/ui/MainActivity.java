@@ -20,6 +20,11 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateMonthYearPicker.OnDateChangeListener{
 
     private ListView mListView;
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private class ContentsAdapter extends CursorAdapter{
 
         private int itemPadding = 6;
+        private SimpleDateFormat readableFormatter = new SimpleDateFormat("MMM dd, YYYY");
 
         public ContentsAdapter(Cursor c) {
             super(MainActivity.this, c, true);
@@ -104,7 +110,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String amountValue = String.format(amountFormat, cursor.getString(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
             ((TextView)view.findViewById(R.id.inex_item_amount)).setText(amountValue);
             ((TextView)view.findViewById(R.id.inex_item_description)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)));
-            ((TextView)view.findViewById(R.id.inex_item_date)).setText(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE)));
+            String dateString = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE));
+            try {
+                Date date = InEx.DATE_FORMATTER.parse(dateString);
+                dateString = readableFormatter.format(date);
+            }catch (ParseException pe){
+                pe.printStackTrace();
+            }
+            ((TextView)view.findViewById(R.id.inex_item_date)).setText(dateString);
         }
 
     }
