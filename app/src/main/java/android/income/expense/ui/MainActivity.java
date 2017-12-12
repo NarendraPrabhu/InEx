@@ -19,13 +19,14 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveResourceClient;
 import com.google.android.gms.tasks.Task;
 
 import java.text.ParseException;
@@ -76,8 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, 100);
         }else {
-
-            Toast.makeText(this, account.getDisplayName() + " "+account.getEmail(), Toast.LENGTH_SHORT).show();
+            tryDrive(account);
         }
     }
 
@@ -192,11 +192,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
+
+        if(requestCode == 101){
+
+        }
     }
+
+    private void tryDrive(GoogleSignInAccount account){
+        if(account != null){
+            if (!GoogleSignIn.hasPermissions(
+                    GoogleSignIn.getLastSignedInAccount(this),
+                    Drive.SCOPE_APPFOLDER)) {
+                GoogleSignIn.requestPermissions(
+                        this,
+                        101,
+                        GoogleSignIn.getLastSignedInAccount(this),
+                        Drive.SCOPE_APPFOLDER);
+            } else {
+
+                DriveResourceClient drc = Drive.getDriveResourceClient(this, account);
+
+            }
+        }
+    }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            checkGoogleAccount();
+            tryDrive(account);
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
