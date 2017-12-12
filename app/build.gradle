@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'naren_key'
+            keyPassword 'naren@Keystore'
+            storeFile file('/Users/narensmac/naren_key.keystore')
+            storePassword 'naren@Keystore'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "android.income.expense"
@@ -11,12 +19,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug{
+        debug {
             minifyEnabled false
+            signingConfig signingConfigs.config
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -30,5 +40,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.google.android.gms:play-services-vision:9.0.0+'
+    compile 'com.google.android.gms:play-services-vision:11.6.0'
+    compile 'com.google.android.gms:play-services-auth:11.6.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

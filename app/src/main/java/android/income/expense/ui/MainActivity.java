@@ -19,10 +19,17 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateMonthYearPicker.OnDateChangeListener{
@@ -57,6 +64,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         refresh();
+    }
+
+    private void checkGoogleAccount(){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        if(account == null){
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, 100);
+        }else {
+
+            Toast.makeText(this, account.getDisplayName() + " "+account.getEmail(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void refresh(){
@@ -163,4 +185,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTotalTextView.setText(String.format(getResources().getString(R.string.total), totalAmount));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            checkGoogleAccount();
+            // Signed in successfully, show authenticated UI.
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            e.printStackTrace();
+        }
+    }
 }
