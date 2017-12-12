@@ -8,6 +8,7 @@ import android.income.expense.R;
 import android.income.expense.data.InEx;
 import android.income.expense.data.InExManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,9 +28,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.drive.Drive;
+import com.google.android.gms.drive.DriveContents;
+import com.google.android.gms.drive.DriveFile;
+import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveResourceClient;
+import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -192,10 +206,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
-
-        if(requestCode == 101){
-
-        }
     }
 
     private void tryDrive(GoogleSignInAccount account){
@@ -211,9 +221,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
 
                 DriveResourceClient drc = Drive.getDriveResourceClient(this, account);
+                createFileInAppFolder(drc);
 
             }
         }
+    }
+
+    private void createFileInAppFolder(final DriveResourceClient drc) {
+        final Task<DriveFolder> appFolderTask = drc.getAppFolder();
+        final Task<DriveContents> createContentsTask = drc.createContents();
+        Tasks.whenAll(appFolderTask, createContentsTask)
+                .continueWithTask(new Continuation<Void, Task<DriveFile>>() {
+                    @Override
+                    public Task<DriveFile> then(@NonNull Task<Void> task) throws Exception {
+                        DriveFolder parent = appFolderTask.getResult();
+                        DriveContents contents = createContentsTask.getResult();
+                        OutputStream outputStream = contents.getOutputStream();
+                        try (Writer writer = new OutputStreamWriter(outputStream)) {
+                            writer.write("Hello World!");
+                        }
+
+                        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
+                                .setTitle("New file")
+                                .setMimeType("text/plain")
+                                .setStarred(true)
+                                .build();
+
+                        return drc.createFile(parent, changeSet, contents);
+                    }
+                })
+                .addOnSuccessListener(this,
+                        new OnSuccessListener<DriveFile>() {
+                            @Override
+                            public void onSuccess(DriveFile driveFile) {
+                                Toast.makeText(MainActivity.this, "file created", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "file failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
