@@ -26,10 +26,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import android.income.expense.R;
-import android.income.expense.data.Expense;
-import android.income.expense.data.InExManager;
-import android.income.expense.ui.AddInExActivity;
+import naren.income.expense.R;
+import naren.income.expense.data.Expense;
+import naren.income.expense.data.InExManager;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -52,10 +52,8 @@ import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-import com.google.gson.annotations.Expose;
 
 import java.io.IOException;
 import java.util.regex.Matcher;

@@ -42,6 +42,45 @@
           "status": 1
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443524837491:android:36dd0348234b4de1",
+        "android_client_info": {
+          "package_name": "naren.income.expense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443524837491-bu1or33pcb4lre3uo24e6jq5rgpg510k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "naren.income.expense",
+            "certificate_hash": "52362233725deb4a60d78bfe14ddcde14b8f0f57"
+          }
+        },
+        {
+          "client_id": "443524837491-hbmt88ti1129np65gqq8mb91nupn82mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDczlyJCyCAhOXaAW0zz_I5qRY9fvcjAm0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
     }
   ],
   "configuration_version": "1"
