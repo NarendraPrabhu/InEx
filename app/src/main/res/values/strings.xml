@@ -11,6 +11,7 @@
         <item>@string/label_description_spent</item>
         <item>@string/label_description_earned</item>
     </array>
+    <string name="bill_saved">Bill saved</string>
     <string name="label_amount">Amount</string>
     <string name="label_date">On Date</string>
     <string name="save">Save</string>

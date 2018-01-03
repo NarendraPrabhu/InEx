@@ -119,6 +119,15 @@
                 android:src="@android:drawable/ic_menu_delete"
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/ocr_capture_amount_entity"
+            android:id="@+id/ocr_capture_save"
+            android:visibility="gone"
+            android:text="@string/save"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 </FrameLayout>

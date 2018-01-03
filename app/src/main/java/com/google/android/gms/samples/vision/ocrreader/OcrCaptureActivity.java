@@ -27,6 +27,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.income.expense.R;
+import android.income.expense.data.Expense;
+import android.income.expense.data.InExManager;
 import android.income.expense.ui.AddInExActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -40,6 +42,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +55,7 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.google.gson.annotations.Expose;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -92,6 +96,7 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
 
     private String description = null;
     private String amount = null;
+    private Button saveButton = null;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -102,6 +107,9 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
 
         findViewById(R.id.ocr_capture_remove_amount).setOnClickListener(this);
         findViewById(R.id.ocr_capture_remove_description).setOnClickListener(this);
+        saveButton = findViewById(R.id.ocr_capture_save);
+        saveButton.setOnClickListener(this);
+        saveButton.setVisibility(View.GONE);
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
 
@@ -473,24 +481,14 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
                                 break;
                         }
 
+                        saveButton.setVisibility(View.GONE);
                         if(!TextUtils.isEmpty(description) && !TextUtils.isEmpty(amount)){
-                            startAddActivity();
+                            saveButton.setVisibility(View.VISIBLE);
                         }
                     }
                 })
                 .create();
         builder.show();
-    }
-
-    private void startAddActivity(){
-        Intent intent = new Intent(this, AddInExActivity.class);
-        intent.putExtra(AddInExActivity.EXTRA_PARAM_DESCRIPTION, description);
-        if(amount.contains(",")){
-            amount = amount.replace(",","");
-        }
-        intent.putExtra(AddInExActivity.EXTRA_PARAM_AMOUNT, amount);
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -507,6 +505,17 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
                 findViewById(R.id.ocr_capture_amount_entity).setVisibility(View.GONE);
                 ((TextView)findViewById(R.id.ocr_capture_captured_amount)).setText(description);
                 ((TextView)findViewById(R.id.ocr_capture_helper_text)).setText(R.string.helper_amount);
+                break;
+            case R.id.ocr_capture_save:
+                if(amount.contains(",")){
+                    amount = amount.replace(",","");
+                }
+                Float amountValue = Float.parseFloat(amount);
+                Expense expense = new Expense(description, amountValue, System.currentTimeMillis());
+                if(InExManager.getInstance(this).save(expense)){
+                    Toast.makeText(this, R.string.bill_saved, Toast.LENGTH_SHORT).show();
+                }
+                finish();
                 break;
         }
     }
