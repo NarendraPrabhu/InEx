@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private class ContentsAdapter extends CursorAdapter{
 
-        private SimpleDateFormat readableFormatter = new SimpleDateFormat("MMM dd, YYYY");
+        private SimpleDateFormat readableFormatter = new SimpleDateFormat("MMM dd, yyyy");
 
         public ContentsAdapter(Cursor c) {
             super(MainActivity.this, c, true);
