@@ -12,7 +12,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "naren.income.expense"
-        minSdkVersion 15
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 3
         versionName "1.0.0.2"

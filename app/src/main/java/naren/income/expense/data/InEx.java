@@ -93,4 +93,9 @@ public abstract class InEx {
         inx.time = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE));
         return inx;
     }
+
+    @Override
+    public String toString() {
+        return description+" : "+amount;
+    }
 }

@@ -1,14 +1,24 @@
 package naren.income.expense.ui;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import naren.income.expense.R;
 import naren.income.expense.data.InEx;
 import naren.income.expense.data.InExManager;
+import naren.income.expense.receivers.SmsReceiver;
+import naren.income.expense.services.SmsProcessService;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -55,12 +65,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mTotalTextView;
     private String amountFormat;
 
+    private final int RC_HANDLE_SMS_PERMISSION = 0x001;
+
+    private ComponentName smsComponentName = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mInExManager = InExManager.getInstance(this);
         amountFormat = getResources().getString(R.string.amount);
+
+        smsComponentName = new ComponentName(getBaseContext().getPackageName(), SmsReceiver.class.getName());
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,7 +88,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDateMonthYearPicker = findViewById(R.id.main_date_month_year_picker);
         mDateMonthYearPicker.setOnDateChangeListener(this);
         mTotalTextView = findViewById(R.id.main_total_amount);
+
+        int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS);
+        if (rc == PackageManager.PERMISSION_GRANTED) {
+            checkSmsComponent();
+        }else{
+            requestSmsPermission();
+        }
     }
+
+    private void checkSmsComponent(){
+        PackageManager pm = getPackageManager();
+        if(pm.getComponentEnabledSetting(smsComponentName) == PackageManager.COMPONENT_ENABLED_STATE_DISABLED){
+            pm.setComponentEnabledSetting(smsComponentName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+            SmsProcessService.start(this, new SmsProcessService.OnProcessCompleteListener(new Handler()){
+
+                @Override
+                public void onProcessComplete() {
+                    if(mListAdapter != null){
+                        mListAdapter.notifyDataSetChanged();
+                        mListAdapter.notifyDataSetInvalidated();
+                    }
+                }
+            });
+        }
+    }
+
+    private void requestSmsPermission() {
+
+        final String[] permissions = new String[]{
+                Manifest.permission.RECEIVE_SMS,
+                Manifest.permission.READ_SMS
+        };
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_SMS_PERMISSION);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_SMS_PERMISSION);
+            }
+        };
+
+        Snackbar.make(mListView, R.string.permission_camera_rationale,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok, listener)
+                .show();
+    }
+
 
     @Override
     protected void onResume() {
@@ -273,6 +344,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode != RC_HANDLE_SMS_PERMISSION) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+
+        if(grantResults != null) {
+            if (grantResults.length == 0) {
+                Toast.makeText(this, R.string.request_permissions, Toast.LENGTH_LONG).show();
+            } else {
+                int state = (grantResults[0] == PackageManager.PERMISSION_GRANTED)?PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+                PackageManager pm = getPackageManager();
+                pm.setComponentEnabledSetting(smsComponentName, state, PackageManager.DONT_KILL_APP);
+
+                if(grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                    SmsProcessService.start(this, new SmsProcessService.OnProcessCompleteListener(new Handler()){
+
+                        @Override
+                        public void onProcessComplete() {
+                            refresh();
+                        }
+                    });
+                }
+            }
         }
     }
 }
