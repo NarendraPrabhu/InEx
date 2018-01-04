@@ -2,6 +2,7 @@ package naren.income.expense.data;
 
 import android.database.Cursor;
 
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DateFormat;
@@ -37,6 +38,10 @@ public abstract class InEx {
 
     @SerializedName(COLUMN_DATE)
     private String time;
+
+    public InEx(){
+
+    }
     
     protected InEx(String description, float amount, boolean isIncome){
         this.amount = amount;
@@ -97,5 +102,9 @@ public abstract class InEx {
     @Override
     public String toString() {
         return description+" : "+amount;
+    }
+
+    public String toJson(){
+        return new GsonBuilder().create().toJson(this);
     }
 }

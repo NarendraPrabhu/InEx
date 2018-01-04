@@ -2,6 +2,9 @@ package naren.income.expense.data;
 
 import android.content.Context;
 import android.database.Cursor;
+
+import java.util.List;
+
 import naren.income.expense.data.db.DatabaseHelper;
 
 /**
@@ -38,6 +41,10 @@ public class InExManager{
 
     public int getTotal(int day, int month, int year){
         return mDatabaseHelper.getTotal(day, month, year);
+    }
+
+    public List<InEx> getAllItems(){
+        return mDatabaseHelper.getAllItems();
     }
 
 }

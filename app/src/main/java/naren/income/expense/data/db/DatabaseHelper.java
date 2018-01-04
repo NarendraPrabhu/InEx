@@ -5,10 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import naren.income.expense.data.Expense;
 import naren.income.expense.data.InEx;
+import naren.income.expense.data.Income;
+
 import android.text.TextUtils;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -108,6 +114,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor = null;
         }
         return total;
+    }
+
+    private InEx fromCursor(Cursor cursor){
+        InEx item = null;
+        float amount = cursor.getFloat(cursor.getColumnIndex(InEx.COLUMN_AMOUNT));
+        String description = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION));
+        String dateString = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE));
+        try {
+            Date date = InEx.DATE_FORMATTER.parse(dateString);
+            int isIncome = cursor.getInt(cursor.getColumnIndex(InEx.COLUMN_IS_INCOME));
+            if(isIncome == 1){
+                item = new Income(description, amount, date.getTime());
+            }else{
+                item = new Expense(description, amount, date.getTime());
+            }
+        }catch (ParseException pe){
+            pe.printStackTrace();
+        }
+        return item;
+    }
+
+    public List<InEx> getAllItems(){
+        List<InEx> items = new ArrayList<>();
+        Cursor cursor = query(-1,-1, -1);
+        if(cursor == null){
+            return items;
+        }
+        if(cursor.moveToFirst()){
+            do{
+                InEx item = fromCursor(cursor);
+                if(item != null){
+                    items.add(item);
+                }
+            }while (cursor.moveToNext());
+        }
+
+        return items;
     }
 
     public Cursor query(int day, int month, int year){
