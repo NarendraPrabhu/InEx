@@ -58,7 +58,7 @@ public class SmsProcessService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         switch (intent.getStringExtra(EXTRA_STATE)+"") {
             case EXTRA_VALUE_NEW_SMS: {
-                List<SmsItem> items = intent.getParcelableExtra(EXTRA_SMS);
+                List<SmsItem> items = (ArrayList)intent.getSerializableExtra(EXTRA_SMS);
                 if (items == null) {
                     return;
                 }
@@ -113,11 +113,11 @@ public class SmsProcessService extends IntentService {
         }
     }
 
-    public static void start(Context context, SmsItem... item){
+    public static void start(Context context, ArrayList<SmsItem> items){
         Intent service = new Intent(context, SmsProcessService.class);
         service.putExtra(SmsProcessService.EXTRA_STATE, EXTRA_VALUE_NEW_SMS);
-        if(item != null) {
-            service.putExtra(SmsProcessService.EXTRA_SMS, item);
+        if(items != null) {
+            service.putExtra(SmsProcessService.EXTRA_SMS, items);
         }
         context.startService(service);
     }

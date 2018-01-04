@@ -40,10 +40,7 @@ public class SmsReceiver  extends BroadcastReceiver{
                         String msgBody = msgs[i].getMessageBody();
                         items.add(new SmsItem(msgFrom, msgBody));
                     }
-
-                    SmsItem[] itemArray = new SmsItem[items.size()];
-                    items.toArray(itemArray);
-                    SmsProcessService.start(context, itemArray);
+                    SmsProcessService.start(context, items);
                 }catch(Exception e){
                     e.printStackTrace();
                 }

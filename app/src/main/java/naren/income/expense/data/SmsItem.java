@@ -39,11 +39,11 @@ public class SmsItem implements Parcelable{
         return date;
     }
 
-    protected static Creator<SmsItem> CREATOR = new Creator<SmsItem>() {
+    public static Parcelable.Creator<SmsItem> CREATOR = new Creator<SmsItem>() {
         @Override
         public SmsItem createFromParcel(Parcel parcel) {
             SmsItem item = new SmsItem(parcel.readString(), parcel.readString(), parcel.readLong());
-            return null;
+            return item;
         }
 
         @Override
