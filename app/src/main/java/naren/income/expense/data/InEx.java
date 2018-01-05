@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by narensmac on 04/12/17.
  */
 
-public abstract class InEx {
+public class InEx {
 
     public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -43,14 +43,14 @@ public abstract class InEx {
 
     }
     
-    protected InEx(String description, float amount, boolean isIncome){
+    public InEx(String description, float amount, boolean isIncome){
         this.amount = amount;
         this.description = description;
         this.isIncome = isIncome;
         this.time = DATE_FORMATTER.format(new Date());
     }
 
-    protected InEx(String description, float amount, boolean isIncome, long time){
+    public InEx(String description, float amount, boolean isIncome, long time){
         this.amount = amount;
         this.description = description;
         this.isIncome = isIncome;
@@ -86,14 +86,8 @@ public abstract class InEx {
     }
 
     public static InEx fromCursor(final Cursor cursor){
-        InEx inx = null;
-        if(cursor.getInt(cursor.getColumnIndex(COLUMN_IS_INCOME))==1){
-            inx = new Income(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)),
-                    cursor.getFloat(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
-        }else {
-           inx = new Expense(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)),
-                    cursor.getFloat(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)));
-        }
+        InEx inx = new InEx(cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DESCRIPTION)),
+                    cursor.getFloat(cursor.getColumnIndex(InEx.COLUMN_AMOUNT)), cursor.getInt(cursor.getColumnIndex(COLUMN_IS_INCOME))==1);
         inx.id = cursor.getLong(cursor.getColumnIndex(InEx.COLUMN_ID));
         inx.time = cursor.getString(cursor.getColumnIndex(InEx.COLUMN_DATE));
         return inx;

@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import naren.income.expense.R;
-import naren.income.expense.data.Expense;
 import naren.income.expense.data.InEx;
 import naren.income.expense.data.InExManager;
-import naren.income.expense.data.Income;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -124,12 +123,7 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
                     return;
                 }
                 Float amount = Float.parseFloat(amountString);
-                InEx inEx = null;
-                if(inexOptionsSpinner.getSelectedItemPosition() == 0){
-                    inEx = new Expense(description, amount, time);
-                }else{
-                    inEx = new Income(description, amount, time);
-                }
+                InEx inEx = new InEx(description, amount,inexOptionsSpinner.getSelectedItemPosition() == 0, time);
                 if(mInExManager.save(inEx)){
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

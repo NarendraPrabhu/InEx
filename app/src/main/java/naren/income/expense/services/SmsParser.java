@@ -1,11 +1,9 @@
 package naren.income.expense.services;
 
-import android.util.Log;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import naren.income.expense.data.Expense;
+import naren.income.expense.data.InEx;
 
 /**
  * Created by narensmac on 04/01/18.
@@ -31,8 +29,8 @@ public class SmsParser {
     };
 
 
-    public static Expense parse(String body, long time){
-        Expense expense = null;
+    public static InEx parse(String body, long time){
+        InEx expense = null;
         Matcher amountMatcher = PATTERN_AMOUNT.matcher(body);
         Float amount = null;
         if(amountMatcher.find()){
@@ -68,7 +66,7 @@ public class SmsParser {
         }
 
         if(isPresent){
-            expense = new Expense(body, amount, time);
+            expense = new InEx(body, amount, false, time);
         }
 
         return expense;

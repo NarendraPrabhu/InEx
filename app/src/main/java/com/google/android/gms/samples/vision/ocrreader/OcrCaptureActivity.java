@@ -27,7 +27,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import naren.income.expense.R;
-import naren.income.expense.data.Expense;
+import naren.income.expense.data.InEx;
 import naren.income.expense.data.InExManager;
 
 import android.os.Bundle;
@@ -509,7 +509,7 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
                     amount = amount.replace(",","");
                 }
                 Float amountValue = Float.parseFloat(amount);
-                Expense expense = new Expense(description, amountValue, System.currentTimeMillis());
+                InEx expense = new InEx(description, amountValue, false, System.currentTimeMillis());
                 if(InExManager.getInstance(this).save(expense)){
                     Toast.makeText(this, R.string.bill_saved, Toast.LENGTH_SHORT).show();
                 }

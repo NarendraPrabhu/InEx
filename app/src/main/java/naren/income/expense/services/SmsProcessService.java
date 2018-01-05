@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import naren.income.expense.data.Expense;
+import naren.income.expense.data.InEx;
 import naren.income.expense.data.InExManager;
 import naren.income.expense.data.SmsItem;
 
@@ -106,7 +106,7 @@ public class SmsProcessService extends IntentService {
             return;
         }
         for(SmsItem item : items) {
-            Expense expense = SmsParser.parse(item.getData(), item.getDate().getTime());
+            InEx expense = SmsParser.parse(item.getData(), item.getDate().getTime());
             if (expense != null) {
                 mInExManager.save(expense);
             }

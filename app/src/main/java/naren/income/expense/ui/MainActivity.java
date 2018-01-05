@@ -13,7 +13,10 @@ import naren.income.expense.data.InEx;
 import naren.income.expense.data.InExManager;
 import naren.income.expense.receivers.SmsReceiver;
 import naren.income.expense.services.SmsProcessService;
+import naren.income.expense.ui.tasks.BackupAndExportTask;
+import naren.income.expense.ui.tasks.ImportAndRestoreTask;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -58,6 +61,8 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateMonthYearPicker.OnDateChangeListener{
 
+    private static final int REQUEST_CODE_GOOGLE_AUTH = 0x100;
+    private static final int REQUEST_CODE_IMPORT_FILE = 0x101;
     private ListView mListView;
     private ContentsAdapter mListAdapter;
     private InExManager mInExManager;
@@ -159,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         if(account == null){
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, 100);
+            startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_AUTH);
         }else {
             tryDrive(account);
         }
@@ -187,8 +192,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            new ExportAndBackupTask(this).execute();
+        if (item.getItemId() == R.id.action_backup) {
+            new BackupAndExportTask(this).execute();
+            return true;
+        }
+        if (item.getItemId() == R.id.action_restore) {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            startActivityForResult(intent, REQUEST_CODE_IMPORT_FILE);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -273,9 +284,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100){
+        if(requestCode == REQUEST_CODE_GOOGLE_AUTH){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
+            return;
+        }
+        if(requestCode == REQUEST_CODE_IMPORT_FILE && resultCode == RESULT_OK){
+            Uri uri = data.getData();
+            ImportAndRestoreTask iart = new ImportAndRestoreTask(this, uri, new ImportAndRestoreTask.ImportCompleteListener() {
+                @Override
+                public void onImportComplete() {
+                    refresh();
+                }
+            });
+            iart.execute();
         }
     }
 

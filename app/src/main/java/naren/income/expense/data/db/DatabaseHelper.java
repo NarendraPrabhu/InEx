@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import naren.income.expense.data.Expense;
 import naren.income.expense.data.InEx;
-import naren.income.expense.data.Income;
 
 import android.text.TextUtils;
 
@@ -124,11 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             Date date = InEx.DATE_FORMATTER.parse(dateString);
             int isIncome = cursor.getInt(cursor.getColumnIndex(InEx.COLUMN_IS_INCOME));
-            if(isIncome == 1){
-                item = new Income(description, amount, date.getTime());
-            }else{
-                item = new Expense(description, amount, date.getTime());
-            }
+            item = new InEx(description, amount, isIncome == 1, date.getTime());
         }catch (ParseException pe){
             pe.printStackTrace();
         }
@@ -137,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<InEx> getAllItems(){
         List<InEx> items = new ArrayList<>();
-        Cursor cursor = query(-1,-1, -1);
+        Cursor cursor = query(0,0, 0);
         if(cursor == null){
             return items;
         }
