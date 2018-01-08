@@ -13,7 +13,7 @@ public class SmsParser {
 
     private static final Pattern PATTERN_AMOUNT = Pattern.compile("(?i)(?:(?:RS|INR|MRP)\\.?\\s?)(\\d+(:?\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)");
     //private static final String PATTERN_MERCHANT = "(?i)(?:\\sat\\s|in\\*)([A-Za-z0-9]*\\s?-?\\s?[A-Za-z0-9]*\\s?-?\\.?)";
-    private static final Pattern PATTEN_DIGITS_ALONE = Pattern.compile("-?[\\d,\\,,\\.]+");
+    private static final Pattern PATTEN_DIGITS_ALONE = Pattern.compile("-?[0-9, \\,]*\\.?[0-9]+");
 
     private static final String[][] KEYS_TO_CONTAIN = {
             {"spent", "spnt"},
@@ -42,7 +42,7 @@ public class SmsParser {
                     if (m.groupCount() > 1) {
                         return expense;
                     }
-                    amountString = m.group();
+                    amountString = m.group(0);
                     if (amountString.contains(",")) {
                         amountString = amountString.replace(",", "");
                     }

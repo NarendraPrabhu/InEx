@@ -39,7 +39,7 @@ public class SmsItem implements Parcelable{
         return date;
     }
 
-    public static Parcelable.Creator<SmsItem> CREATOR = new Creator<SmsItem>() {
+    public static final Parcelable.Creator<SmsItem> CREATOR = new Creator<SmsItem>() {
         @Override
         public SmsItem createFromParcel(Parcel parcel) {
             SmsItem item = new SmsItem(parcel.readString(), parcel.readString(), parcel.readLong());
@@ -62,5 +62,10 @@ public class SmsItem implements Parcelable{
         parcel.writeString(from);
         parcel.writeString(data);
         parcel.writeLong(date.getTime());
+    }
+
+    @Override
+    public String toString() {
+        return from+" : "+data+" : "+date;
     }
 }

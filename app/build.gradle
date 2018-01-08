@@ -14,8 +14,8 @@ android {
         applicationId "naren.income.expense"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 5
-        versionName "1.0.0.4"
+        versionCode 6
+        versionName "1.0.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,8 +24,7 @@ android {
             signingConfig signingConfigs.config
         }
         release {
-            shrinkResources true
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }

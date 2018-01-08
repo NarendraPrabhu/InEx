@@ -1,6 +1,8 @@
 package naren.income.expense.data;
 
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
@@ -13,7 +15,7 @@ import java.util.Date;
  * Created by narensmac on 04/12/17.
  */
 
-public class InEx {
+public class InEx implements Parcelable{
 
     public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -101,4 +103,36 @@ public class InEx {
     public String toJson(){
         return new GsonBuilder().create().toJson(this);
     }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(description);
+        parcel.writeFloat(amount);
+        parcel.writeInt(isIncome ? 1 : 0);
+        parcel.writeString(time);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<InEx> CREATOR = new Creator<InEx>() {
+        @Override
+        public InEx createFromParcel(Parcel parcel) {
+            InEx inEx = new InEx();
+            inEx.id = parcel.readLong();
+            inEx.description = parcel.readString();
+            inEx.amount = parcel.readFloat();
+            inEx.isIncome = parcel.readInt() == 1;
+            inEx.time = parcel.readString();
+            return inEx;
+        }
+
+        @Override
+        public InEx[] newArray(int i) {
+            return new InEx[i];
+        }
+    };
 }
