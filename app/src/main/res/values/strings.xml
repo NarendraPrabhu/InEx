@@ -26,4 +26,7 @@
     <string name="notification_message_exporting">Exporting...</string>
     <string name="notification_message_importing">Importing...</string>
     <string name="not_our_backup_file">Not a backup file we are looking for!!!</string>
+    <string name="notification_added_new_expense">Added Expense</string>
+    <string name="delete">Delete</string>
+    <string name="keep">Keep</string>
 </resources>

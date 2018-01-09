@@ -67,7 +67,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(InEx.COLUMN_IS_INCOME, value.isIncome() ? 1 : 0);
 
         if(value.getId() == -1){
-            returnValue = (getWritableDatabase().insert(InEx.class.getSimpleName(), null, cv) != -1);
+            long id = getWritableDatabase().insert(InEx.class.getSimpleName(), null, cv);
+            value.id = id;
+            returnValue = (id != -1);
         }else{
             returnValue = (getWritableDatabase().update(InEx.class.getSimpleName(), cv, InEx.COLUMN_ID+"=?", new String[]{""+value.getId()}) > 0);
         }

@@ -56,10 +56,8 @@ public class BackupAndExportTask extends AsyncTask<Void, Void, Void>{
         builder.setContentTitle(mContext.getString(R.string.backup_and_export));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             builder.setSubText(mContext.getString(R.string.notification_message_exporting));
-            nm.notify(NOTIFICATION_ID, builder.build());
-        }else {
-            nm.notify(NOTIFICATION_ID, builder.build());
         }
+        nm.notify(NOTIFICATION_ID, builder.build());
     }
 
     @Override

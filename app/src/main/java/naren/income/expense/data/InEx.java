@@ -27,7 +27,7 @@ public class InEx implements Parcelable{
     
     
     @SerializedName(COLUMN_ID)
-    private long id = -1;
+    public long id = -1;
 
     @SerializedName(COLUMN_DESCRIPTION)
     private String description;
@@ -115,7 +115,7 @@ public class InEx implements Parcelable{
 
     @Override
     public int describeContents() {
-        return 0;
+        return (int)id;
     }
 
     public static final Creator<InEx> CREATOR = new Creator<InEx>() {
