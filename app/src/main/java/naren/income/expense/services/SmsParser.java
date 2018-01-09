@@ -11,9 +11,9 @@ import naren.income.expense.data.InEx;
 
 public class SmsParser {
 
-    private static final Pattern PATTERN_AMOUNT = Pattern.compile("(?i)(?:(?:RS|INR|MRP)\\.?\\s?)(\\d+(:?\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)");
+    public static final Pattern PATTERN_AMOUNT = Pattern.compile("(?i)(?:(?:RS|INR|MRP|₹)\\.?\\s?)(\\d+(:?\\,\\d+)?(\\,\\d+)?(\\.\\d{1,2})?)");
     //private static final String PATTERN_MERCHANT = "(?i)(?:\\sat\\s|in\\*)([A-Za-z0-9]*\\s?-?\\s?[A-Za-z0-9]*\\s?-?\\.?)";
-    private static final Pattern PATTEN_DIGITS_ALONE = Pattern.compile("-?[0-9, \\,]*\\.?[0-9]+");
+    public static final Pattern PATTERN_DIGITS_ALONE = Pattern.compile("-?[0-9, \\,]*\\.?[0-9]+");
 
     private static final String[][] KEYS_TO_CONTAIN = {
             {"spent", "spnt"},
@@ -36,7 +36,7 @@ public class SmsParser {
         if(amountMatcher.find()){
             try {
                 String amountString = amountMatcher.group();
-                Matcher m = PATTEN_DIGITS_ALONE.matcher(amountString);
+                Matcher m = PATTERN_DIGITS_ALONE.matcher(amountString);
 
                 if (m.find()) {
                     if (m.groupCount() > 1) {

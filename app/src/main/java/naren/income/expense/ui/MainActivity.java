@@ -8,14 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
-import naren.income.expense.R;
-import naren.income.expense.data.InEx;
-import naren.income.expense.data.InExManager;
-import naren.income.expense.receivers.SmsReceiver;
-import naren.income.expense.services.SmsProcessService;
-import naren.income.expense.ui.tasks.BackupAndExportTask;
-import naren.income.expense.ui.tasks.ImportAndRestoreTask;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,33 +27,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveFolder;
-import com.google.android.gms.drive.DriveResourceClient;
-import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
-
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import naren.income.expense.R;
+import naren.income.expense.data.InEx;
+import naren.income.expense.data.InExManager;
+import naren.income.expense.receivers.SmsReceiver;
+import naren.income.expense.services.SmsProcessService;
+import naren.income.expense.ui.tasks.BackupAndExportTask;
+import naren.income.expense.ui.tasks.ImportAndRestoreTask;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, DateMonthYearPicker.OnDateChangeListener{
 
-    private static final int REQUEST_CODE_GOOGLE_AUTH = 0x100;
     private static final int REQUEST_CODE_IMPORT_FILE = 0x101;
     private ListView mListView;
     private ContentsAdapter mListAdapter;
@@ -154,20 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         refresh();
-    }
-
-    private void checkGoogleAccount(){
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        if(account == null){
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_AUTH);
-        }else {
-            tryDrive(account);
-        }
     }
 
     private void refresh(){
@@ -284,11 +249,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_GOOGLE_AUTH){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-            return;
-        }
         if(requestCode == REQUEST_CODE_IMPORT_FILE && resultCode == RESULT_OK){
             Uri uri = data.getData();
             ImportAndRestoreTask iart = new ImportAndRestoreTask(this, uri, new ImportAndRestoreTask.ImportCompleteListener() {
@@ -298,75 +258,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
             iart.execute();
-        }
-    }
-
-    private void tryDrive(GoogleSignInAccount account){
-        if(account != null){
-            if (!GoogleSignIn.hasPermissions(
-                    GoogleSignIn.getLastSignedInAccount(this),
-                    Drive.SCOPE_APPFOLDER)) {
-                GoogleSignIn.requestPermissions(
-                        this,
-                        101,
-                        GoogleSignIn.getLastSignedInAccount(this),
-                        Drive.SCOPE_APPFOLDER);
-            } else {
-
-                DriveResourceClient drc = Drive.getDriveResourceClient(this, account);
-                createFileInAppFolder(drc);
-
-            }
-        }
-    }
-
-    private void createFileInAppFolder(final DriveResourceClient drc) {
-        final Task<DriveFolder> appFolderTask = drc.getAppFolder();
-        final Task<DriveContents> createContentsTask = drc.createContents();
-        Tasks.whenAll(appFolderTask, createContentsTask)
-                .continueWithTask(new Continuation<Void, Task<DriveFile>>() {
-                    @Override
-                    public Task<DriveFile> then(@NonNull Task<Void> task) throws Exception {
-                        DriveFolder parent = appFolderTask.getResult();
-                        DriveContents contents = createContentsTask.getResult();
-                        OutputStream outputStream = contents.getOutputStream();
-                        try (Writer writer = new OutputStreamWriter(outputStream)) {
-                            writer.write("Hello World!");
-                        }
-
-                        MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
-                                .setTitle("New file")
-                                .setMimeType("text/plain")
-                                .setStarred(true)
-                                .build();
-
-                        return drc.createFile(parent, changeSet, contents);
-                    }
-                })
-                .addOnSuccessListener(this,
-                        new OnSuccessListener<DriveFile>() {
-                            @Override
-                            public void onSuccess(DriveFile driveFile) {
-                                Toast.makeText(MainActivity.this, "file created", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, "file failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            tryDrive(account);
-            // Signed in successfully, show authenticated UI.
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            e.printStackTrace();
         }
     }
 

@@ -26,10 +26,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
-import naren.income.expense.R;
-import naren.income.expense.data.InEx;
-import naren.income.expense.data.InExManager;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -59,6 +55,10 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import naren.income.expense.R;
+import naren.income.expense.data.InEx;
+import naren.income.expense.data.InExManager;
+
 /**
  * Activity for the Ocr Detecting app.  This app detects text and displays the value with the
  * rear facing camera. During detection overlay graphics are drawn to indicate the position,
@@ -82,7 +82,6 @@ public final class OcrCaptureActivity extends AppCompatActivity implements View.
     // Constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
-    public static final String TextBlockObject = "String";
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;

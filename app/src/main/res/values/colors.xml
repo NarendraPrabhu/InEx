@@ -3,8 +3,10 @@
     <color name="colorPrimary">#FF999999</color>
     <color name="colorPrimaryDark">#FF666666</color>
     <color name="colorAccent">#FF777777</color>
-    <color name="dk_gray">#BB999999</color>
+    <color name="dk_gray">#AA999999</color>
+    <color name="bg_gray">#AA000000</color>
     <color name="gray">#44999999</color>
     <color name="lt_gray">#55CCCCCC</color>
     <color name="translucent">#DDFFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

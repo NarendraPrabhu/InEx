@@ -16,6 +16,7 @@
     <string name="label_date">On Date</string>
     <string name="save">Save</string>
     <string name="warning_field_cannot_be_empty"> \'%s\' cannot be empty</string>
+    <string name="indian_rupee">\u20B9</string>
     <string name="total">Total : %s</string>
     <string name="amount">\u20B9%s</string>
     <string name="helper_description">Show the  bill, Tap somewhere in the bill for description</string>

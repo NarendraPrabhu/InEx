@@ -20,7 +20,7 @@
     </com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/dk_gray"
+        android:background="@color/bg_gray"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:padding="10dp"
             android:text="@string/helper_description"
             android:textColor="@color/translucent"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>
         <RelativeLayout
@@ -50,11 +50,12 @@
                 android:layout_alignParentLeft="true"
                 android:id="@+id/ocr_capture_label_description"
                 android:paddingRight="20dp"
+                android:textStyle="bold"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:text="@string/label_description"
-                android:textColor="@color/translucent"
-                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_width="match_parent"
@@ -64,8 +65,8 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:id="@+id/ocr_capture_captured_description"
-                android:textColor="@color/translucent"
-                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:layout_height="wrap_content"/>
             <ImageButton
                 android:layout_width="wrap_content"
@@ -95,8 +96,9 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:text="@string/label_amount"
-                android:textColor="#FFAAAAAA"
-                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_width="match_parent"
@@ -106,8 +108,8 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 android:id="@+id/ocr_capture_captured_amount"
-                android:textColor="#FFEEEEEE"
-                android:textSize="13sp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:layout_height="wrap_content"/>
             <ImageButton
                 android:layout_width="wrap_content"
