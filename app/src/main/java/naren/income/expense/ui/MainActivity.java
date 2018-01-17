@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         smsComponentName = new ComponentName(getBaseContext().getPackageName(), SmsReceiver.class.getName());
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         findViewById(R.id.fab).setOnClickListener(this);
 
         mListView = findViewById(R.id.main_list);
