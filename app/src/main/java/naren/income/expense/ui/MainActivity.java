@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mListView = findViewById(R.id.main_list);
         addEmptyHeaderAndFooter();
+
         mDateMonthYearPicker = findViewById(R.id.main_date_month_year_picker);
         mDateMonthYearPicker.setOnDateChangeListener(this);
         mTotalTextView = findViewById(R.id.main_total_amount);
@@ -136,7 +137,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void refresh(){
-        Cursor cursor = mInExManager.query(mDateMonthYearPicker.getCurrentDay(), mDateMonthYearPicker.getCurrentMonth(), mDateMonthYearPicker.getCurrentYear());
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        if(mDateMonthYearPicker != null){
+            day = mDateMonthYearPicker.getCurrentDay();
+            month = mDateMonthYearPicker.getCurrentMonth();
+            year = mDateMonthYearPicker.getCurrentYear();
+        }
+
+        Cursor cursor = mInExManager.query(day, month, year);
         if(cursor == null){
             return;
         }
@@ -241,7 +251,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setTotal(){
-        int total = mInExManager.getTotal(mDateMonthYearPicker.getCurrentDay(), mDateMonthYearPicker.getCurrentMonth(), mDateMonthYearPicker.getCurrentYear());
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        if(mDateMonthYearPicker != null){
+            day = mDateMonthYearPicker.getCurrentDay();
+            month = mDateMonthYearPicker.getCurrentMonth();
+            year = mDateMonthYearPicker.getCurrentYear();
+        }
+        int total = mInExManager.getTotal(day, month, year);
         String totalAmount = String.format(amountFormat, ""+total);
         mTotalTextView.setText(String.format(getResources().getString(R.string.total), totalAmount));
     }

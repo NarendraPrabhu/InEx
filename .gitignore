@@ -1,5 +1,7 @@
-.gitignore
 .idea
 app/app.iml
 build/android-profile/
 .gradle
+local.properties
+app/app.iml
+gradle/*

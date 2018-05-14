@@ -1,5 +1,6 @@
 package naren.income.expense.ui;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
@@ -71,6 +72,7 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         init();
     }
 
+    @TargetApi(21)
     public DateMonthYearPicker(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
@@ -152,7 +154,7 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if(view == null){
-                view = createTextView(getContext());
+                view = createTextView(getContext(), viewGroup);
             }
             ((TextView)view).setText(i == 0 ? "All" : (i)+"");
             return view;
@@ -181,7 +183,7 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if(view == null){
-                view = createTextView(getContext());
+                view = createTextView(getContext(), viewGroup);
             }
             ((TextView)view).setText(months[i]);
             return view;
@@ -212,14 +214,14 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             if(view == null){
-                view = createTextView(getContext());
+                view = createTextView(getContext(), viewGroup);
             }
             ((TextView)view).setText(""+(INIT_YEAR+i));
             return view;
         }
     }
 
-    private TextView createTextView(Context context){
+    private TextView createTextView(Context context, ViewGroup vg){
         TextView view = null;
         if(textViewResourceId == -1) {
             view = new TextView(getContext());
@@ -231,7 +233,7 @@ public final class DateMonthYearPicker extends LinearLayout implements AdapterVi
             Spinner.LayoutParams lp = new Spinner.LayoutParams(Spinner.LayoutParams.MATCH_PARENT, Spinner.LayoutParams.MATCH_PARENT);
             view.setLayoutParams(lp);
         }else{
-            view = (TextView) LayoutInflater.from(context).inflate(textViewResourceId, null);
+            view = (TextView) LayoutInflater.from(context).inflate(textViewResourceId, vg, false);
         }
         return view;
     }

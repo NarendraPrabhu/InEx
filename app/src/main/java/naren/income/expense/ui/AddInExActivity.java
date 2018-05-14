@@ -125,7 +125,6 @@ public class AddInExActivity extends Activity implements View.OnClickListener, A
                 Float amount = Float.parseFloat(amountString);
                 InEx inEx = new InEx(description, amount,inexOptionsSpinner.getSelectedItemPosition() == 0, time);
                 if(mInExManager.save(inEx)){
-                    startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }else{
                     Toast.makeText(this,"Failed", Toast.LENGTH_SHORT).show();
