@@ -6,7 +6,7 @@ android {
         applicationId "naren.income.expense"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 11
+        versionCode 12
         versionName "1.0.0.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
